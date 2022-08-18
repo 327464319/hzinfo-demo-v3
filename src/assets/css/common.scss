@@ -1,0 +1,37 @@
+/** 分页样式 */
+.pagination{
+  padding: 25px 22px;
+  box-sizing: border-box;
+}
+/** flex纵向布局样式 */
+.flex-column{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  background: $commonBgColor;
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/** 表格样式 实现表头固定 内容超出滚动 */
+.table{
+  flex: 1;
+  overflow: hidden;
+  // 表格若不添加 height:100% 使用以下代码
+  .el-table__inner-wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .el-table__body-wrapper{
+      flex: 1;
+      overflow: auto!important;
+    }
+    // 若内容超出一直显示滚动条则使用以下代码
+    // .el-scrollbar__bar.is-vertical{
+    //   display: block!important;
+    // }
+  }
+}
