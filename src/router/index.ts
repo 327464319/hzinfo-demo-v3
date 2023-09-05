@@ -1,10 +1,11 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
+import {name} from '../../package.json'
 
 // 引入路由
 import routes from './moudles'
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(`/${name}`),
   routes
 })
 export default router

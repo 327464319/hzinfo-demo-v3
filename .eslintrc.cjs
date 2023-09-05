@@ -29,6 +29,7 @@ module.exports = {
       multiline: { max: 1 }
     }], // vue template模板元素第一行最多3个属性, 大于三个需要换行且一行一个
     'vue/html-indent': 'off',
+    'object-curly-spacing': 'off',
     'prefer-const': 'off' // 禁止未使用变量强制使用const 因为ref使用的是obj.value方式操作变量
   }
 }

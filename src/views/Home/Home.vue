@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HelloWorld msg="微前端"/>
+    <HelloWorld msg="微前端"/>ss
   </div>
 </template>
 <script lang="ts" setup>
