@@ -1,11 +1,12 @@
-import { createPinia } from 'pinia'
+import {createPinia} from 'pinia'
 // 持久化处理
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+// import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 // 引入根据模块创建好的状态管理
-import { useMainStore } from './modules/mainStore'
+import {useMainStore} from './modules/mainStore'
+import {useCommonStore} from './modules/common'
 // 创建pinia状态管理对象
 const pinia = createPinia()
-pinia.use(piniaPluginPersistedstate)
+// pinia.use(piniaPluginPersistedstate)
 // 暴露
-export { useMainStore }
+export {useMainStore, useCommonStore}
 export default pinia

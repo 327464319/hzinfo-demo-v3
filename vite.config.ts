@@ -19,7 +19,8 @@ export default ({ mode }) => {
       }),
       // 配置 Eslint 可检测的文件
       eslintPlugin({
-        include: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.vue', 'src/*.js', 'src/*.ts', 'src/*.vue']
+        // include: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.vue', 'src/*.js', 'src/*.ts', 'src/*.vue']
+        include: ['src/**/*.vue', 'src/*.vue']
       }),
       AutoImport({
         resolvers: [ElementPlusResolver()]
@@ -35,6 +36,7 @@ export default ({ mode }) => {
       }
     },
     server: {
+      open: '/index.html',
       port: +loadEnv(mode, process.cwd()).VITE_CHILDONE_URL.split(':')[1],
       origin: loadEnv(mode, process.cwd()).VITE_CHILDONE_URL
     },
