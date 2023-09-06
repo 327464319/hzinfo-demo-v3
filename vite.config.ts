@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import eslintPlugin from 'vite-plugin-eslint'
+// import eslintPlugin from 'vite-plugin-eslint'
 import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -18,10 +18,10 @@ export default ({ mode }) => {
         useDevMode: true
       }),
       // 配置 Eslint 可检测的文件
-      eslintPlugin({
-        // include: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.vue', 'src/*.js', 'src/*.ts', 'src/*.vue']
-        include: ['src/**/*.vue', 'src/*.vue']
-      }),
+      // eslintPlugin({
+      //   // include: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.vue', 'src/*.js', 'src/*.ts', 'src/*.vue']
+      //   include: ['src/**/*.vue', 'src/*.vue']
+      // }),
       AutoImport({
         resolvers: [ElementPlusResolver()]
       }),
