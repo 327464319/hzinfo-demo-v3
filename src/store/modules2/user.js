@@ -1,5 +1,5 @@
-import {setToken, setRefreshToken, removeToken, removeRefreshToken} from '@/util/auth'
-import {Message} from 'element-ui'
+import {removeToken, removeRefreshToken} from '@/util/auth'
+import {ElMessage} from 'element-plus'
 import {setStore, getStore} from '@/util/store'
 import {isURL, validatenull} from '@/util/validate'
 import {deepClone} from '@/util/util'
@@ -16,6 +16,7 @@ import {
 } from '@/api/user'
 import {getTopMenu, getRoutes, getAppRoutes, getJsonRoutes} from '@/api/system/menu'
 import md5 from 'js-md5'
+import {defineStore} from 'pinia'
 
 function addPath (ele, first) {
   const menu = website.menu
@@ -39,24 +40,26 @@ function addPath (ele, first) {
   }
 }
 
-const user = {
-  state: {
-    tenantId: getStore({name: 'tenantId'}) || '',
-    subStation: getStore({name: 'subStation'}) || {},
-    userInfo: getStore({name: 'userInfo'}) || [],
-    permission: getStore({name: 'permission'}) || {},
-    roles: [],
-    menu: getStore({name: 'menu'}) || [],
-    menuId: getStore({name: 'menuId'}) || [],
-    menuAll: getStore({name: 'menuAll'}) || [],
-    token: getStore({name: 'token'}) || '',
-    refreshToken: getStore({name: 'refreshToken'}) || '',
-    appCode: getStore({name: 'appCode'}) || '', // 当前项目code
-    dataAuthKey: getStore({name: 'dataAuthKey'}) || '' // 唯一路由key
+export const useUserStore = defineStore('user', {
+  state: () => {
+    return {
+      tenantId: getStore({name: 'tenantId'}) || '',
+      subStation: getStore({name: 'subStation'}) || {},
+      userInfo: getStore({name: 'userInfo'}) || [],
+      permission: getStore({name: 'permission'}) || {},
+      roles: [],
+      menu: getStore({name: 'menu'}) || [],
+      menuId: getStore({name: 'menuId'}) || [],
+      menuAll: getStore({name: 'menuAll'}) || [],
+      token: getStore({name: 'token'}) || '',
+      refreshToken: getStore({name: 'refreshToken'}) || '',
+      appCode: getStore({name: 'appCode'}) || '', // 当前项目code
+      dataAuthKey: getStore({name: 'dataAuthKey'}) || '' // 唯一路由key
+    }
   },
   actions: {
     // 根据用户名登录
-    LoginByUsername ({commit}, userInfo) {
+    LoginByUsername (userInfo) {
       return new Promise((resolve, reject) => {
         loginByUsername(
           userInfo.tenantId,
@@ -69,17 +72,13 @@ const user = {
           .then((res) => {
             const data = res.data
             if (data.error_description) {
-              Message({
-                message: data.error_description,
+              ElMessage({
+                ElMessage: data.error_description,
                 type: 'error'
               })
             } else {
-              commit('SET_TOKEN', data.access_token)
-              commit('SET_REFRESH_TOKEN', data.refresh_token)
-              commit('SET_TENANT_ID', data.tenant_id)
-              commit('SET_USER_INFO', data)
-              commit('DEL_ALL_TAG')
-              commit('CLEAR_LOCK')
+              this._setData(data)
+              this.SET_TENANT_ID(data.tenant_id)
             }
             resolve()
           })
@@ -89,43 +88,42 @@ const user = {
       })
     },
     // 根据手机号登录
-    LoginByPhone ({commit}, userInfo) {
+    LoginByPhone (userInfo) {
       return new Promise((resolve) => {
         loginByPhone(userInfo.tenantId, userInfo.phone, userInfo.code, userInfo.key).then((res) => {
           const data = res.data
           if (data.error_description) {
-            Message({
-              message: data.error_description,
+            ElMessage({
+              ElMessage: data.error_description,
               type: 'error'
             })
           } else {
-            commit('SET_TOKEN', data.access_token)
-            commit('SET_REFRESH_TOKEN', data.refresh_token)
-            commit('SET_USER_INFO', data)
-            commit('DEL_ALL_TAG')
-            commit('CLEAR_LOCK')
+            this._setData(data)
           }
           resolve()
         })
       })
     },
+    _setData (data) {
+      this.SET_TOKEN(data.access_token)
+      this.SET_REFRESH_TOKEN(data.refresh_token)
+      this.SET_USER_INFO(data)
+      this.DEL_ALL_TAG()
+      this.CLEAR_LOCK()
+    },
     // 根据第三方信息登录
-    LoginBySocial ({commit}, userInfo) {
+    LoginBySocial (userInfo) {
       return new Promise((resolve) => {
         loginBySocial(userInfo.tenantId, userInfo.source, userInfo.code, userInfo.state).then(
           (res) => {
             const data = res.data
             if (data.error_description) {
-              Message({
-                message: data.error_description,
+              ElMessage({
+                ElMessage: data.error_description,
                 type: 'error'
               })
             } else {
-              commit('SET_TOKEN', data.access_token)
-              commit('SET_REFRESH_TOKEN', data.refresh_token)
-              commit('SET_USER_INFO', data)
-              commit('DEL_ALL_TAG')
-              commit('CLEAR_LOCK')
+              this._setData(data)
             }
             resolve()
           }
@@ -133,12 +131,12 @@ const user = {
       })
     },
     // 获取用户信息
-    GetUserInfo ({commit}) {
+    GetUserInfo () {
       return new Promise((resolve, reject) => {
         getUserInfo()
           .then((res) => {
             const data = res.data.data
-            commit('SET_ROLES', data.roles)
+            this.SET_ROLES(data.roles)
             resolve(data)
           })
           .catch((err) => {
@@ -147,14 +145,14 @@ const user = {
       })
     },
     // 刷新token
-    refreshToken ({state, commit}) {
+    refreshToken () {
       window.console.log('handle refresh token')
       return new Promise((resolve, reject) => {
-        refreshToken(state.refreshToken, state.tenantId)
+        refreshToken(this.refreshToken, this.tenantId)
           .then((res) => {
             const data = res.data
-            commit('SET_TOKEN', data.access_token)
-            commit('SET_REFRESH_TOKEN', data.refresh_token)
+            this.SET_TOKEN(data.access_token)
+            this.SET_REFRESH_TOKEN(data.refresh_token)
             resolve()
           })
           .catch((error) => {
@@ -163,19 +161,19 @@ const user = {
       })
     },
     // 登出
-    LogOut ({commit}) {
+    LogOut () {
       return new Promise((resolve, reject) => {
         logout()
           .then(() => {
-            commit('SET_TOKEN', '')
-            commit('SET_MENU', [])
-            commit('SET_MENU_ID', {})
-            commit('SET_MENU_ALL', [])
-            commit('SET_ROLES', [])
-            commit('SET_TAG_LIST', [])
-            commit('SET_DATA_AUTH_KEY', '')
-            commit('DEL_ALL_TAG')
-            commit('CLEAR_LOCK')
+            this.SET_TOKEN('')
+            this.SET_MENU([])
+            this.SET_MENU_ID({})
+            this.SET_MENU_ALL([])
+            this.SET_ROLES([])
+            this.SET_TAG_LIST([])
+            this.SET_DATA_AUTH_KEY('')
+            this.DEL_ALL_TAG()
+            this.CLEAR_LOCK()
             removeToken()
             removeRefreshToken()
             resolve()
@@ -186,17 +184,17 @@ const user = {
       })
     },
     // 注销session
-    FedLogOut ({commit}) {
+    FedLogOut () {
       return new Promise((resolve) => {
-        commit('SET_TOKEN', '')
-        commit('SET_MENU_ID', {})
-        commit('SET_MENU_ALL', [])
-        commit('SET_MENU', [])
-        commit('SET_ROLES', [])
-        commit('SET_TAG_LIST', [])
-        commit('SET_DATA_AUTH_KEY', '')
-        commit('DEL_ALL_TAG')
-        commit('CLEAR_LOCK')
+        this.SET_TOKEN('')
+        this.SET_MENU_ID({})
+        this.SET_MENU_ALL([])
+        this.SET_MENU([])
+        this.SET_ROLES([])
+        this.SET_TAG_LIST([])
+        this.SET_DATA_AUTH_KEY('')
+        this.DEL_ALL_TAG()
+        this.CLEAR_LOCK()
         removeToken()
         removeRefreshToken()
         resolve()
@@ -212,7 +210,7 @@ const user = {
       })
     },
     // 获取系统菜单
-    GetMenu ({commit, dispatch}, topMenuId) {
+    GetMenu (topMenuId) {
       return new Promise((resolve) => {
         getRoutes(topMenuId).then((res) => {
           // console.log('导航', res)
@@ -221,30 +219,30 @@ const user = {
           menu.forEach((ele) => {
             addPath(ele, true)
           })
-          commit('SET_MENU_ALL', menu)
-          commit('SET_MENU', menu)
-          dispatch('GetButtons')
+          this.SET_MENU_ALL(menu)
+          this.SET_MENU(menu)
+          this.GetButtons()
           resolve(menu)
         })
       })
     },
-    GetJsonRoutes ({commit, dispatch}, appCode) {
+    GetJsonRoutes (appCode) {
       return new Promise((resolve) => {
         getJsonRoutes().then((res) => {
-          commit('SET_APP_CODE', res.data.appCode)
+          this.SET_APP_CODE(res.data.appCode)
           const menu = res.data.menu
           console.log('GetAppMenu ---------------------', menu)
           menu.forEach((ele) => {
             addPath(ele, true)
           })
-          commit('SET_MENU_ALL', menu)
-          commit('SET_MENU', menu)
+          this.SET_MENU_ALL(menu)
+          this.SET_MENU(menu)
           resolve(menu)
         })
       })
     },
     // 获取系统菜单
-    GetAppMenu ({commit, dispatch}, appCode) {
+    GetAppMenu (appCode) {
       return new Promise((resolve) => {
         let client = 0 // 0: pc端  1: 手机端
         getAppRoutes(appCode, client).then((res) => {
@@ -254,60 +252,60 @@ const user = {
           menu.forEach((ele) => {
             addPath(ele, true)
           })
-          commit('SET_MENU_ALL', menu)
-          commit('SET_MENU', menu)
-          dispatch('GetAppButtons')
+          this.SET_MENU_ALL(menu)
+          this.SET_MENU(menu)
+          this.GetAppButtons()
           resolve(menu)
         })
       })
     },
     // 获取系统菜单
-    GetAppButtons ({commit, state}) {
+    GetAppButtons () {
       return new Promise((resolve) => {
         let client = 0 // 0: pc端   1: 手机端
-        getAppButtons(state.appCode, client).then((res) => {
+        getAppButtons(this.appCode, client).then((res) => {
           const data = res.data.data
-          commit('SET_PERMISSION', data)
+          this.SET_PERMISSION(data)
           resolve()
         })
       })
     },
     // 获取系统按钮
-    GetButtons ({commit}) {
+    GetButtons () {
       return new Promise((resolve) => {
         getButtons().then((res) => {
           const data = res.data.data
-          commit('SET_PERMISSION', data)
+          this.SET_PERMISSION(data)
           resolve()
         })
       })
-    }
-  },
-  mutations: {
-    SET_TOKEN: (state, token) => {
+    },
+    //
+
+    SET_TOKEN: (token) => {
       // setToken(token);
-      state.token = token
-      setStore({name: 'token', content: state.token})
+      this.token = token
+      setStore({name: 'token', content: this.token})
     },
-    SET_MENU_ID (state, menuId) {
-      state.menuId = menuId
-      setStore({name: 'menuId', content: state.menuId})
+    SET_MENU_ID (menuId) {
+      this.menuId = menuId
+      setStore({name: 'menuId', content: this.menuId})
     },
-    SET_MENU_ALL: (state, menuAll) => {
-      state.menuAll = menuAll
-      setStore({name: 'menuAll', content: state.menuAll})
+    SET_MENU_ALL: (menuAll) => {
+      this.menuAll = menuAll
+      setStore({name: 'menuAll', content: this.menuAll})
     },
-    // SET_MENU_APPS: (state, menuApps) => {
-    //   state.menuApps = menuApps
-    //   console.log('menuApps',  state.menuApps)
-    //   setStore({name: 'menuApps', content: state.menuApps})
+    // SET_MENU_APPS: ( menuApps) => {
+    //   this.menuApps = menuApps
+    //   console.log('menuApps',  this.menuApps)
+    //   setStore({name: 'menuApps', content: this.menuApps})
     // },
-    SET_MENU: (state, menu) => {
-      state.menu = menu
-      setStore({name: 'menu', content: state.menu})
+    SET_MENU: (menu) => {
+      this.menu = menu
+      setStore({name: 'menu', content: this.menu})
       if (validatenull(menu)) return
       // 合并动态路由去重
-      let menuAll = state.menuAll
+      let menuAll = this.menuAll
       menuAll = menuAll.concat(menu).reverse()
       let newMenu = []
       for (let item1 of menuAll) {
@@ -321,37 +319,37 @@ const user = {
           newMenu.push(item1)
         }
       }
-      state.menuAll = newMenu
-      setStore({name: 'menuAll', content: state.menuAll})
+      this.menuAll = newMenu
+      setStore({name: 'menuAll', content: this.menuAll})
     },
-    SET_APP_CODE: (state, appCode) => {
-      state.appCode = appCode
-      setStore({name: 'appCode', content: state.appCode})
+    SET_APP_CODE: (appCode) => {
+      this.appCode = appCode
+      setStore({name: 'appCode', content: this.appCode})
     },
-    SET_REFRESH_TOKEN: (state, refreshToken) => {
+    SET_REFRESH_TOKEN: (refreshToken) => {
       // setRefreshToken(refreshToken)
-      state.refreshToken = refreshToken
-      setStore({name: 'refreshToken', content: state.refreshToken})
+      this.refreshToken = refreshToken
+      setStore({name: 'refreshToken', content: this.refreshToken})
     },
-    SET_TENANT_ID: (state, tenantId) => {
-      state.tenantId = tenantId
-      setStore({name: 'tenantId', content: state.tenantId})
+    SET_TENANT_ID: (tenantId) => {
+      this.tenantId = tenantId
+      setStore({name: 'tenantId', content: this.tenantId})
     },
-    SET_USER_INFO: (state, userInfo) => {
+    SET_USER_INFO: (userInfo) => {
       if (validatenull(userInfo.avatar)) {
         userInfo.avatar = '/img/bg/img-logo.png'
       }
-      state.userInfo = userInfo
-      setStore({name: 'userInfo', content: state.userInfo})
+      this.userInfo = userInfo
+      setStore({name: 'userInfo', content: this.userInfo})
     },
-    SET_DATA_AUTH_KEY: (state, dataAuthKey) => {
-      state.dataAuthKey = dataAuthKey
-      setStore({name: 'dataAuthKey', content: state.dataAuthKey})
+    SET_DATA_AUTH_KEY: (dataAuthKey) => {
+      this.dataAuthKey = dataAuthKey
+      setStore({name: 'dataAuthKey', content: this.dataAuthKey})
     },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles
+    SET_ROLES: (roles) => {
+      this.roles = roles
     },
-    SET_PERMISSION: (state, permission) => {
+    SET_PERMISSION: (permission) => {
       let result = []
 
       function getCode (list) {
@@ -369,12 +367,11 @@ const user = {
       }
 
       getCode(permission)
-      state.permission = {}
+      this.permission = {}
       result.forEach((ele) => {
-        state.permission[ele] = true
+        this.permission[ele] = true
       })
-      setStore({name: 'permission', content: state.permission})
+      setStore({name: 'permission', content: this.permission})
     }
   }
-}
-export default user
+})

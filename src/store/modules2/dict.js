@@ -1,37 +1,35 @@
 import {getStore, setStore} from '@/util/store'
-
+import {defineStore} from 'pinia'
 import {getDictionary} from '@/api/system/dict'
 
-const dict = {
-  state: {
-    flowRoutes: getStore({name: 'flowRoutes'}) || {}
+export const useDictStore = defineStore('dict', {
+  state: () => {
+    return {
+      flowRoutes: getStore({name: 'flowRoutes'}) || {}
+    }
   },
   actions: {
     // 发送错误日志
-    FlowRoutes ({commit}) {
+    FlowRoutes () {
       return new Promise((resolve, reject) => {
         getDictionary({code: 'flow'})
           .then((res) => {
-            commit('SET_FLOW_ROUTES', res.data.data)
+            this.SET_FLOW_ROUTES(res.data.data)
             resolve()
           })
           .catch((error) => {
             reject(error)
           })
       })
-    }
-  },
-  mutations: {
-    SET_FLOW_ROUTES: (state, data) => {
-      state.flowRoutes = data.map((item) => {
+    },
+    SET_FLOW_ROUTES: (data) => {
+      this.flowRoutes = data.map((item) => {
         return {
           routeKey: `${item.code}_${item.dictKey}`,
           routeValue: item.remark
         }
       })
-      setStore({name: 'flowRoutes', content: state.flowRoutes})
+      setStore({name: 'flowRoutes', content: this.flowRoutes})
     }
   }
-}
-
-export default dict
+})

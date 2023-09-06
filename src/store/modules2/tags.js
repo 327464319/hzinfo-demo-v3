@@ -1,7 +1,7 @@
 import {setStore, getStore} from '@/util/store'
 import {diff} from '@/util/util'
 import website from '@/config/website'
-
+import {defineStore} from 'pinia'
 const isFirstPage = website.isFirstPage
 const tagWel = website.fistPage
 const tagObj = {
@@ -28,48 +28,46 @@ function setFistTag (list) {
   }
 }
 
-const navs = {
+export const useNavsStore = defineStore('navs', {
   state: {
     tagList: getStore({name: 'tagList'}) || [],
     tag: getStore({name: 'tag'}) || tagObj,
     tagWel
   },
-  actions: {},
-  mutations: {
-    ADD_TAG: (state, action) => {
-      state.tag = action
-      setStore({name: 'tag', content: state.tag})
-      if (state.tagList.some((ele) => diff(ele, action))) return
-      state.tagList.push(action)
-      setFistTag(state.tagList)
-      setStore({name: 'tagList', content: state.tagList})
+  actions: {
+    ADD_TAG: (action) => {
+      this.tag = action
+      setStore({name: 'tag', content: this.tag})
+      if (this.tagList.some((ele) => diff(ele, action))) return
+      this.tagList.push(action)
+      setFistTag(this.tagList)
+      setStore({name: 'tagList', content: this.tagList})
     },
-    DEL_TAG: (state, action) => {
-      state.tagList = state.tagList.filter((item) => {
+    DEL_TAG: (action) => {
+      this.tagList = this.tagList.filter((item) => {
         return !diff(item, action)
       })
-      setFistTag(state.tagList)
-      setStore({name: 'tagList', content: state.tagList})
+      setFistTag(this.tagList)
+      setStore({name: 'tagList', content: this.tagList})
     },
-    DEL_ALL_TAG: (state) => {
-      state.tagList = [state.tagWel]
-      setStore({name: 'tagList', content: state.tagList})
+    DEL_ALL_TAG: () => {
+      this.tagList = [this.tagWel]
+      setStore({name: 'tagList', content: this.tagList})
     },
-    DEL_TAG_OTHER: (state) => {
-      state.tagList = state.tagList.filter((item) => {
-        if (item.value === state.tag.value) {
+    DEL_TAG_OTHER: () => {
+      this.tagList = this.tagList.filter((item) => {
+        if (item.value === this.tag.value) {
           return true
         } else if (!website.isFirstPage && item.value === website.fistPage.value) {
           return true
         }
       })
-      setFistTag(state.tagList)
-      setStore({name: 'tagList', content: state.tagList})
+      setFistTag(this.tagList)
+      setStore({name: 'tagList', content: this.tagList})
     },
-    SET_TAG_LIST (state, tagList) {
-      state.tagList = tagList
-      setStore({name: 'tagList', content: state.tagList})
+    SET_TAG_LIST (tagList) {
+      this.tagList = tagList
+      setStore({name: 'tagList', content: this.tagList})
     }
   }
-}
-export default navs
+})

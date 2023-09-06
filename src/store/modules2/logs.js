@@ -1,28 +1,30 @@
 import {setStore, getStore} from '@/util/store'
 import {dateFormat} from '@/util/date'
-import {sendLogs} from '@/api/user'
 
-const logs = {
-  state: {
-    logsList: getStore({name: 'logsList'}) || []
+import {sendLogs} from '@/api/user'
+import {defineStore} from 'pinia'
+
+export const useLogsStore = defineStore('dict', {
+  state: () => {
+    return {
+      logsList: getStore({name: 'logsList'}) || []
+    }
   },
   actions: {
-    SendLogs ({state, commit}) {
+    SendLogs () {
       return new Promise((resolve, reject) => {
-        sendLogs(state.logsList)
+        sendLogs(this.logsList)
           .then(() => {
-            commit('CLEAR_LOGS')
+            this.CLEAR_LOGS()
             resolve()
           })
           .catch((error) => {
             reject(error)
           })
       })
-    }
-  },
-  mutations: {
-    ADD_LOGS: (state, {type, message, stack, info}) => {
-      state.logsList.push(
+    },
+    ADD_LOGS: ({type, message, stack, info}) => {
+      this.logsList.push(
         Object.assign(
           {
             url: window.location.href,
@@ -39,11 +41,9 @@ const logs = {
       // setStore({name: 'logsList', content: state.logsList})
       setStore({name: 'logsList', content: []})
     },
-    CLEAR_LOGS: (state) => {
-      state.logsList = []
-      setStore({name: 'logsList', content: state.logsList})
+    CLEAR_LOGS: () => {
+      this.logsList = []
+      setStore({name: 'logsList', content: this.logsList})
     }
   }
-}
-
-export default logs
+})

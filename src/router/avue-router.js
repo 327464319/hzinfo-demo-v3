@@ -1,6 +1,3 @@
-import {useNavsStore} from '@/store'
-const {DEL_TAG} = useNavsStore()
-
 let RouterPlugin = function () {
   this.$router = null
   this.$store = null
@@ -8,7 +5,6 @@ let RouterPlugin = function () {
 RouterPlugin.install = function (vue, router, store, i18n) {
   this.$router = router
   this.$store = store
-  // eslint-disable-next-line new-cap
   this.$vue = new vue({i18n})
 
   // // 这个的作用是 为了检查出网页链接，因为本项目用到了 iframe
@@ -44,7 +40,7 @@ RouterPlugin.install = function (vue, router, store, i18n) {
       if (typeof value === 'string') {
         tag = this.$store.getters.tagList.filter(ele => ele.value === value)[0]
       }
-      DEL_TAG(tag)
+      this.$store.commit('DEL_TAG', tag)
     },
     generateTitle: (title, key) => {
       if (!key) return title

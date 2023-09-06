@@ -19,13 +19,9 @@ import {name} from '../../package.json'
 
 // import startQiankun from "../micro/micro";
 import apps from '../mock/menu-apps'
-import {useMicroAppsStore, useUserStore} from '@/store'
-
-const {setPoweredByQiankun} = useMicroAppsStore()
-const {SET_MENU_ALL} = useUserStore()
 
 Vue.use(VueRouter)
-setPoweredByQiankun(window.__POWERED_BY_QIANKUN__)
+Store.commit('setPoweredByQiankun', window.__POWERED_BY_QIANKUN__)
 
 // 创建路由
 export const createRouter = () =>
@@ -60,7 +56,8 @@ if (!Store.state.microApps.__POWERED_BY_QIANKUN__) {
   AvueRouter.install(Vue, Router, Store, i18n) // 初始化和注册 AvueRouter
   let menuAll = Store.state.user.menuAll
   menuAll = menuAll.concat(apps)
-  SET_MENU_ALL(menuAll)
+  Store.commit('SET_MENU_ALL', menuAll)
+  // Store.commit('SET_MENU', menuAll);
   Router.$avueRouter.formatRoutes(menuAll, true) // 动态路由核心方法
 
   Router.addRoutes([...PageRouter, ...ViewsRouter])

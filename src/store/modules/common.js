@@ -1,40 +1,29 @@
-import {defineStore} from 'pinia'
 import {setStore, getStore, removeStore} from '@/util/store'
 import website from '@/config/website'
-export const useCommonStore = defineStore('common', {
-  // 所有数据持久化
-  // persist: true,
-  // 持久化存储插件其他配置
-  // persist: {
-  //   // 修改存储中使用的键名称，默认为当前 Store的 id
-  //   key: 'storekey',
-  //   // 修改为 sessionStorage，默认为 localStorage
-  //   storage: window.sessionStorage
-  // },
-  state: () => {
-    return {
-      language: getStore({name: 'language'}) || 'zh',
-      isCollapse: false,
-      isFullScren: false,
-      isMenu: true,
-      isShade: false,
-      screen: -1,
-      isLock: getStore({name: 'isLock'}) || false,
-      showTag: true,
-      showDebug: false,
-      showCollapse: true,
-      showSearch: true,
-      showLock: false,
-      showFullScren: true,
-      showTheme: true,
-      showMenu: true,
-      showColor: true,
-      colorName: getStore({name: 'colorName'}) || '#409EFF',
-      themeName: getStore({name: 'themeName'}) || 'theme-default',
-      fontSize: getStore({name: 'fontSize'}) || 'font-default',
-      lockPasswd: getStore({name: 'lockPasswd'}) || '',
-      website
-    }
+
+const common = {
+  state: {
+    language: getStore({name: 'language'}) || 'zh',
+    isCollapse: false,
+    isFullScren: false,
+    isMenu: true,
+    isShade: false,
+    screen: -1,
+    isLock: getStore({name: 'isLock'}) || false,
+    showTag: true,
+    showDebug: false,
+    showCollapse: true,
+    showSearch: true,
+    showLock: false,
+    showFullScren: true,
+    showTheme: true,
+    showMenu: true,
+    showColor: true,
+    colorName: getStore({name: 'colorName'}) || '#409EFF',
+    themeName: getStore({name: 'themeName'}) || 'theme-default',
+    fontSize: getStore({name: 'fontSize'}) || 'font-default',
+    lockPasswd: getStore({name: 'lockPasswd'}) || '',
+    website
   },
   actions: {
     LoadBaiduMapScript () {
@@ -47,14 +36,12 @@ export const useCommonStore = defineStore('common', {
       return new Promise((resolve, reject) => {
         // 如果已加载直接返回
         if (typeof BMap !== 'undefined') {
-          // eslint-disable-next-line no-undef
           resolve(BMap)
           return true
         }
         // 百度地图异步加载回调处理
         window.onBMapCallback = function () {
           console.log('百度地图脚本初始化成功...')
-          // eslint-disable-next-line no-undef
           resolve(BMap)
         }
         // 插入script脚本
@@ -65,73 +52,73 @@ export const useCommonStore = defineStore('common', {
       })
     },
     getAddressByLnglat () {
-      // eslint-disable-next-line no-undef,no-unused-vars
       const BMap_URL = `https://api.map.baidu.com/geocoder/v2/?callback=renderReverse&output=json&pois=1&s=1&ak=${AK}`
-      // eslint-disable-next-line no-undef,no-unused-expressions
       ;+'&location=' + address[1] + ',' + address[0]
-    },
-    SET_LANGUAGE: (language) => {
-      this.language = language
+    }
+  },
+  mutations: {
+    SET_LANGUAGE: (state, language) => {
+      state.language = language
       setStore({
         name: 'language',
-        content: this.language
+        content: state.language
       })
     },
-    SET_SHADE: (active) => {
-      this.isShade = active
+    SET_SHADE: (state, active) => {
+      state.isShade = active
     },
-    SET_COLLAPSE: () => {
-      this.isCollapse = !this.isCollapse
+    SET_COLLAPSE: (state) => {
+      state.isCollapse = !state.isCollapse
     },
-    SET_FULLSCREN: () => {
-      this.isFullScren = !this.isFullScren
+    SET_FULLSCREN: (state) => {
+      state.isFullScren = !state.isFullScren
     },
-    SET_IS_MENU: (menu) => {
-      this.isMenu = menu
+    SET_IS_MENU: (state, menu) => {
+      state.isMenu = menu
     },
-    SET_LOCK: () => {
-      this.isLock = true
+    SET_LOCK: (state) => {
+      state.isLock = true
       setStore({
         name: 'isLock',
-        content: this.isLock,
+        content: state.isLock,
         type: 'session'
       })
     },
-    SET_SCREEN: (screen) => {
-      this.screen = screen
+    SET_SCREEN: (state, screen) => {
+      state.screen = screen
     },
-    SET_COLOR_NAME: (colorName) => {
-      this.colorName = colorName
+    SET_COLOR_NAME: (state, colorName) => {
+      state.colorName = colorName
       setStore({
         name: 'colorName',
-        content: this.colorName
+        content: state.colorName
       })
     },
-    SET_THEME_NAME: (themeName) => {
-      this.themeName = themeName
+    SET_THEME_NAME: (state, themeName) => {
+      state.themeName = themeName
       setStore({
         name: 'themeName',
-        content: this.themeName
+        content: state.themeName
       })
     },
-    SET_FONT_SIZE: (fontSize) => {
-      this.fontSize = fontSize
+    SET_FONT_SIZE: (state, fontSize) => {
+      state.fontSize = fontSize
       setStore({
         name: 'fontSize',
-        content: this.fontSize
+        content: state.fontSize
       })
     },
-    SET_LOCK_PASSWD: (lockPasswd) => {
-      this.lockPasswd = lockPasswd
+    SET_LOCK_PASSWD: (state, lockPasswd) => {
+      state.lockPasswd = lockPasswd
       setStore({
         name: 'lockPasswd',
-        content: this.lockPasswd,
+        content: state.lockPasswd,
         type: 'session'
       })
     },
-    CLEAR_LOCK: () => {
-      this.isLock = false
-      this.lockPasswd = ''
+    CLEAR_LOCK: (state) => {
+      state.isLock = false
+      state.lockPasswd = ''
       removeStore({
         name: 'lockPasswd',
         type: 'session'
@@ -142,4 +129,5 @@ export const useCommonStore = defineStore('common', {
       })
     }
   }
-})
+}
+export default common

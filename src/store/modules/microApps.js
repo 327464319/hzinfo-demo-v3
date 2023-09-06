@@ -1,22 +1,20 @@
-import {defineStore} from 'pinia'
-
-export const useMicroAppsStore = defineStore('microApps', {
-  state: () => {
-    return {
-      microAppHtml: '',
-      loading: false,
-      __POWERED_BY_QIANKUN__: null
+export default {
+  state: {
+    microAppHtml: '',
+    loading: false,
+    __POWERED_BY_QIANKUN__: null
+  },
+  mutations: {
+    setMicroAppHtml (state, microAppHtml) {
+      state.microAppHtml = microAppHtml
+    },
+    setLoading (state, loading) {
+      state.loading = loading
+    },
+    setPoweredByQiankun (state, poweredByQiankun) {
+      state.__POWERED_BY_QIANKUN__ = poweredByQiankun
     }
   },
-  actions: {
-    setMicroAppHtml (microAppHtml) {
-      this.microAppHtml = microAppHtml
-    },
-    setLoading (loading) {
-      this.loading = loading
-    },
-    setPoweredByQiankun (poweredByQiankun) {
-      this.__POWERED_BY_QIANKUN__ = poweredByQiankun
-    }
-  }
-})
+  getters: {},
+  actions: {}
+}
