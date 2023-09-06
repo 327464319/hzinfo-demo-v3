@@ -33,7 +33,8 @@ export default ({ mode }) => {
     resolve: {
       alias: {
         '@': resolve('src')
-      }
+      },
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.vue'] // 添加需要自动识别的文件后缀
     },
     server: {
       open: '/index.html',
