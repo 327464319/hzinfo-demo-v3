@@ -11,6 +11,6 @@ export default [{
       i18n: 'dashboard'
     },
     component: () =>
-      import( /* webpackChunkName: "views" */ '@/views/home/index')
+      import(/* webpackChunkName: "views" */ '@/views/home/index')
   }]
 }]

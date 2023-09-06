@@ -31,6 +31,6 @@ const getters = {
   logsFlag: (state, getters) => getters.logsLen === 0,
   flowRoutes: state => state.dict.flowRoutes,
   __POWERED_BY_QIANKUN__: state => state.microApps.__POWERED_BY_QIANKUN__,
-  dataAuthKey: state => state.user.dataAuthKey,
+  dataAuthKey: state => state.user.dataAuthKey
 }
 export default getters

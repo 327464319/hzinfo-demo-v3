@@ -6,7 +6,7 @@ let indexConfig:RouteRecordRaw[] = [
   },
   {
     path: '/base/child/one',
-    component: () => import('@/views/Home/Home.vue'),
+    component: () => import('@/views/Home/index.vue'),
     meta: {
       active: 'childOne'
     }
