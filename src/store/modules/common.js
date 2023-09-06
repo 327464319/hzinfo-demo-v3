@@ -1,9 +1,5 @@
 import {defineStore} from 'pinia'
-import {
-  setStore,
-  getStore,
-  removeStore
-} from '@/util/store'
+import {setStore, getStore, removeStore} from '@/util/store'
 import website from '@/config/website'
 export const useCommonStore = defineStore('common', {
   // 所有数据持久化
@@ -51,12 +47,14 @@ export const useCommonStore = defineStore('common', {
       return new Promise((resolve, reject) => {
         // 如果已加载直接返回
         if (typeof BMap !== 'undefined') {
+          // eslint-disable-next-line no-undef
           resolve(BMap)
           return true
         }
         // 百度地图异步加载回调处理
         window.onBMapCallback = function () {
           console.log('百度地图脚本初始化成功...')
+          // eslint-disable-next-line no-undef
           resolve(BMap)
         }
         // 插入script脚本
@@ -67,7 +65,9 @@ export const useCommonStore = defineStore('common', {
       })
     },
     getAddressByLnglat () {
+      // eslint-disable-next-line no-undef,no-unused-vars
       const BMap_URL = `https://api.map.baidu.com/geocoder/v2/?callback=renderReverse&output=json&pois=1&s=1&ak=${AK}`
+      // eslint-disable-next-line no-undef,no-unused-expressions
       ;+'&location=' + address[1] + ',' + address[0]
     },
     SET_LANGUAGE: (language) => {
