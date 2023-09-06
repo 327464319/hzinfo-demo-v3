@@ -6,7 +6,8 @@ import {name} from '../package.json'
 import routes from './router'
 import {createRouter, createWebHistory} from 'vue-router'
 // pinia
-import pinia from './store'
+// import pinia from './store'
+import store from './store'
 // 引入路由
 let instance: any = null
 let history:any = null
@@ -21,7 +22,7 @@ function render (props: any = {}) {
   })
   instance = createApp(App)
   instance.use(router)
-  instance.use(pinia)
+  instance.use(store)
   instance.mount(container ? container.querySelector('#app') : '#app')
 }
 renderWithQiankun({

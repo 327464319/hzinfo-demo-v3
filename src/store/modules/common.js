@@ -36,6 +36,7 @@ const common = {
       return new Promise((resolve, reject) => {
         // 如果已加载直接返回
         if (typeof BMap !== 'undefined') {
+          // eslint-disable-next-line no-undef
           resolve(BMap)
           return true
         }

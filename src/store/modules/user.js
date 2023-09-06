@@ -1,5 +1,5 @@
-import {setToken, setRefreshToken, removeToken, removeRefreshToken} from '@/util/auth'
-import {Message} from 'element-ui'
+import { removeToken, removeRefreshToken} from '@/util/auth'
+import {ElMessage} from 'element-plus'
 import {setStore, getStore} from '@/util/store'
 import {isURL, validatenull} from '@/util/validate'
 import {deepClone} from '@/util/util'
@@ -69,8 +69,8 @@ const user = {
           .then((res) => {
             const data = res.data
             if (data.error_description) {
-              Message({
-                message: data.error_description,
+              ElMessage({
+                ElMessage: data.error_description,
                 type: 'error'
               })
             } else {
@@ -94,8 +94,8 @@ const user = {
         loginByPhone(userInfo.tenantId, userInfo.phone, userInfo.code, userInfo.key).then((res) => {
           const data = res.data
           if (data.error_description) {
-            Message({
-              message: data.error_description,
+            ElMessage({
+              ElMessage: data.error_description,
               type: 'error'
             })
           } else {
@@ -116,7 +116,7 @@ const user = {
           (res) => {
             const data = res.data
             if (data.error_description) {
-              Message({
+              ElMessage({
                 message: data.error_description,
                 type: 'error'
               })
