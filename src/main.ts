@@ -3,11 +3,12 @@ import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helpe
 import App from './App.vue'
 // 引入路由
 import {name} from '../package.json'
-import routes from './router'
+import routes from './router/router'
 import {createRouter, createWebHistory} from 'vue-router'
 // pinia
 // import pinia from './store'
 import store from './store'
+import 'element-plus/dist/index.css'
 // 引入路由
 let instance: any = null
 let history:any = null

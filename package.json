@@ -16,6 +16,7 @@
     "js-base64": "^3.7.2",
     "js-cookie": "^3.0.5",
     "js-md5": "^0.7.3",
+    "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.17",
     "pinia-plugin-persistedstate": "^2.1.1",
