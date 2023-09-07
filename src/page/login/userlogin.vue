@@ -73,6 +73,7 @@
     name: "userlogin",
     data() {
       return {
+        inputtenantId:'',
         tenantMode: this.website.tenantMode,
         loginForm: {
           //租户ID

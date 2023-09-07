@@ -38,7 +38,7 @@ renderWithQiankun({
     console.log('unmount', props)
     instance.unmount()
     instance._container.innerHTML = ''
-    history.destroy() // 不卸载  router 会导致其他应用路由失败
+    // history.destroy() // 不卸载  router 会导致其他应用路由失败
     instance = null
   }
 })

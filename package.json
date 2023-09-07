@@ -19,8 +19,6 @@
     "js-md5": "^0.7.3",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
-    "pinia": "^2.0.17",
-    "pinia-plugin-persistedstate": "^2.1.1",
     "vite-plugin-qiankun": "^1.0.15",
     "vue": "^3.2.37",
     "vue-i18n": "^9.3.0",
