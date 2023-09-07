@@ -4,6 +4,9 @@ import routes from './config'
 console.log(routes)
 
 console.log('router config')
+const modules = import.meta.glob('../../**/**/*.vue')
+console.log('===========================')
+console.log(modules)
 
 if (routes) {
     function changeChildren (item) {
@@ -23,7 +26,9 @@ if (routes) {
                     })
 
                     const meta = { i18n: lastPath }
-                    const component = () => import(/* webpackChunkName: "views" */ `@/views${child.path}`)
+                // @vite-ignore
+                //     const component = () => import(`@/views${child.path}`)
+                  const component = modules[`../../views${child.path}.vue`]
                    child.meta = meta
                    child.component = component
                 }
@@ -36,7 +41,9 @@ if (routes) {
                 meta: {
                     i18n: 'index'
                 },
-                component: () => import(/* webpackChunkName: "views" */ `@/views${item.path}/index`)
+              // @vite-ignore
+              //   component: () => import( `@/views${item.path}/index`)
+               component :modules[`../../views${item.path}/index.vue`]
             }
             subRoutes.push(subRoute)
 
