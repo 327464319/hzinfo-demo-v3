@@ -3,7 +3,7 @@
     <i class="icon-suoping"
        @click="handleLock"></i>
     <el-dialog title="设置锁屏密码"
-               :visible.sync="box"
+               v-model:visible="box"
                width="30%"
                append-to-body>
       <el-form :model="form"
@@ -26,46 +26,46 @@
 </template>
 
 <script>
-import { validatenull } from "@/util/validate";
-import { mapGetters } from "vuex";
+import { validatenull } from '@/util/validate'
+import { mapGetters } from 'vuex'
 export default {
-  name: "top-lock",
-  data() {
+  name: 'top-lock',
+  data () {
     return {
       box: false,
       form: {
-        passwd: ""
+        passwd: ''
       }
-    };
+    }
   },
-  created() {},
-  mounted() {},
+  created () {},
+  mounted () {},
   computed: {
-    ...mapGetters(["lockPasswd"])
+    ...mapGetters(['lockPasswd'])
   },
   props: [],
   methods: {
-    handleSetLock() {
-      this.$refs["form"].validate(valid => {
+    handleSetLock () {
+      this.$refs.form.validate(valid => {
         if (valid) {
-          this.$store.commit("SET_LOCK_PASSWD", this.form.passwd);
-          this.handleLock();
+          this.$store.commit('SET_LOCK_PASSWD', this.form.passwd)
+          this.handleLock()
         }
-      });
+      })
     },
-    handleLock() {
+    handleLock () {
       if (validatenull(this.lockPasswd)) {
-        this.box = true;
-        return;
+        this.box = true
+        return
       }
-      this.$store.commit("SET_LOCK");
+      this.$store.commit('SET_LOCK')
       setTimeout(() => {
-        this.$router.push({ path: "/lock" });
-      }, 100);
+        this.$router.push({ path: '/lock' })
+      }, 100)
     }
   },
   components: {}
-};
+}
 </script>
 
 <style lang="scss" scoped>

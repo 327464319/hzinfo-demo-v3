@@ -22,32 +22,33 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
-  import logo from "../logo";
-  import sidebarItem from "./sidebarItem";
+  import {mapGetters} from 'vuex'
+  import logo from '../logo'
+  import sidebarItem from './sidebarItem'
+
+  console.log(111)
 
   export default {
-    name: "sidebar",
+    name: 'sidebar',
     components: {sidebarItem, logo},
-    inject: ["index"],
-    data() {
-      return {};
+    inject: ['index'],
+    data () {
+      return {}
     },
-    created() {
-      this.index.openMenu(this.menuId);
+    created () {
+      this.index.openMenu(this.menuId)
     },
     computed: {
-      ...mapGetters(["website", "menu", "menuApps", "tag", "keyCollapse", "screen", "menuId"]),
+      ...mapGetters(['website', 'menu', 'menuApps', 'tag', 'keyCollapse', 'screen', 'menuId']),
       nowTagValue: function () {
-        return this.$router.$avueRouter.getValue(this.$route);
+        return this.$router.$avueRouter.getValue(this.$route)
       }
     },
-    mounted() {
+    mounted () {
       // console.log(this.menuApps)
     },
     methods: {}
-  };
+  }
 </script>
 <style lang="scss" scoped>
 </style>
-

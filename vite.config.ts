@@ -39,7 +39,19 @@ export default ({ mode }) => {
     server: {
       open: '/index.html',
       port: +loadEnv(mode, process.cwd()).VITE_CHILDONE_URL.split(':')[1],
-      origin: loadEnv(mode, process.cwd()).VITE_CHILDONE_URL
+      origin: loadEnv(mode, process.cwd()).VITE_CHILDONE_URL,
+      proxy: {
+        '/api': {
+          //本地服务接口地址
+          target: 'http://192.168.65.86',
+          //远程演示服务地址,可用于直接启动项目
+          //target: 'https://saber.bladex.vip/api',
+          ws: true,
+          // pathRewrite: {
+          //   '^/api': '/'
+          // }
+        }
+      }
     },
     // 设置全局样式
     css: {

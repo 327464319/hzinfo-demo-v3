@@ -35,7 +35,7 @@ export default {
     props: {
       label: 'name',
       path: 'path',
-      icon: process.env.NODE_ENV == 'development' ? 'icon' : 'source',
+      icon: import.meta.env.MODE == 'development' ? 'icon' : 'source',
       children: 'children'
     }
   },
@@ -43,5 +43,5 @@ export default {
   authUrl: `${systemInfo.authUrl}`,
   // 流程设计器地址
   flowDesignUrl: `${systemInfo.flowDesignUrl}`,
-  isDev: process.env.NODE_ENV == 'development'
+  isDev: import.meta.env.MODE == 'development'
 }

@@ -2,10 +2,11 @@ let RouterPlugin = function () {
   this.$router = null
   this.$store = null
 }
-RouterPlugin.install = function (vue, router, store, i18n) {
-  this.$router = router
-  this.$store = store
-  this.$vue = new vue({i18n})
+RouterPlugin.install = function (option = {}) {
+  this.$router = option.router
+  this.$store = option.store
+  let i18n = option.i18n.global
+  console.log(option)
 
   // // 这个的作用是 为了检查出网页链接，因为本项目用到了 iframe
   function isURL (s) {
@@ -30,10 +31,15 @@ RouterPlugin.install = function (vue, router, store, i18n) {
     meta: {},
     safe: this,
     // 设置标题
+    // setTitle: (title) => {
+    //   const defaultTitle = this.$vue.$t('title')
+    //   title = title ? `${title}-${defaultTitle}` : defaultTitle
+    //   document.title = title
+    // },
     setTitle: (title) => {
-      const defaultTitle = this.$vue.$t('title')
-      title = title ? `${title}-${defaultTitle}` : defaultTitle
-      document.title = title
+      const defaultTitle = i18n.t('title');
+      title = title ? `${title} | ${defaultTitle}` : defaultTitle;
+      document.title = title;
     },
     closeTag: (value) => {
       let tag = value || this.$store.getters.tag
@@ -44,10 +50,10 @@ RouterPlugin.install = function (vue, router, store, i18n) {
     },
     generateTitle: (title, key) => {
       if (!key) return title
-      const hasKey = this.$vue.$te('route.' + key)
+      const hasKey = i18n.$te('route.' + key)
       if (hasKey) {
         // $t :this method from vue-i18n, inject in @/lang/index.js
-        const translatedTitle = this.$vue.$t('route.' + key)
+        const translatedTitle = i18n.$t('route.' + key)
 
         return translatedTitle
       }
@@ -191,7 +197,7 @@ RouterPlugin.install = function (vue, router, store, i18n) {
       // 这个first 卡的其实就是首路由
       if (first) {
         if (!this.routerList.includes(aRouter[0][propsDefault.path])) {
-          this.safe.$router.addRoutes(aRouter)
+          aRouter.forEach((ele) => this.safe.$router.addRoute(ele))
           this.routerList.push(aRouter[0][propsDefault.path])
         }
       } else {

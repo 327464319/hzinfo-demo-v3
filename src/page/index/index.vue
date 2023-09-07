@@ -61,6 +61,8 @@ import {validatenull} from '@/util/validate'
 import {calcDate} from '@/util/date.js'
 import {getStore} from '@/util/store.js'
 
+console.log(1111)
+
 export default {
   name: 'index',
   components: {
@@ -118,7 +120,7 @@ export default {
     // 打开菜单
     openMenu (item = {}) {
       // 隐藏菜单请求
-      let env = process.env
+      let env = import.meta.env
       let menuFunc = env.NODE_ENV == 'development' ? 'GetJsonRoutes' : 'GetAppMenu'
       this.$store.dispatch(menuFunc, this.appCode).then((data) => {
         if (data.length !== 0) {
