@@ -72,6 +72,8 @@
       this.getTime();
     },
     mounted() {
+      console.log('1====================')
+      console.log(this.$t('login'))
     },
     computed: {
       ...mapGetters(["website", "tagWel"])

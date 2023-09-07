@@ -1,15 +1,13 @@
 export default {
-  title: 'Avue is a framework',
+  title: `${systemInfo.baseInfoEn}`,
   tip: 'tip',
   logoutTip: 'Exit the system, do you want to continue?',
   submitText: 'submit',
   cancelText: 'cancel',
   search: 'Please input search content',
   menuTip: 'none menu list',
-  feedback: 'feedback',
-  submit: 'submit',
   wel: {
-    info: 'Good morning, Smallwei, Avue is a framework',
+    info: `Good morning, ${systemInfo.baseInfoEn}`,
     dept: 'a certain technology department',
     team: 'Team ranking',
     project: 'Project access',
@@ -46,14 +44,13 @@ export default {
     table: {
       rw: 'Work Tasks',
       nr: 'Work content',
-      sj: 'Working hours'
+      sj: 'Working hours',
     }
   },
   route: {
-    setting: 'setting',
-    detail: 'detail',
     info: 'info',
     website: 'website',
+    avuexwebsite: 'avuex',
     dashboard: 'dashboard',
     more: 'more',
     tags: 'tags',
@@ -62,37 +59,32 @@ export default {
     api: 'api',
     logs: 'logs',
     table: 'table',
-    crud: 'crud',
-    params: 'params',
     form: 'form',
     top: 'backtop',
-    affix: 'affix',
     data: 'data',
-    cache: 'cache',
     error: 'error',
-    test: 'test',
-    out: 'out',
-    about: 'about'
+    test: 'test'
   },
   login: {
     title: 'Login ',
-    info: 'Rapid Development Framework of General Management System',
+    info: `${systemInfo.baseInfoEn}`,
+    tenantId: 'Please input tenantId',
     username: 'Please input username',
     password: 'Please input a password',
     wechat: 'Wechat',
     qq: 'QQ',
+    github: 'github',
+    gitee: 'gitee',
     phone: 'Please input a phone',
     code: 'Please input a code',
     submit: 'Login',
     userLogin: 'userLogin',
     phoneLogin: 'phoneLogin',
     thirdLogin: 'thirdLogin',
-    faceLogin: 'faceLogin',
     msgText: 'send code',
-    msgSuccess: 'reissued code'
+    msgSuccess: 'reissued code',
   },
   navbar: {
-    setting: 'setting',
     info: 'info',
     logOut: 'logout',
     userinfo: 'userinfo',
@@ -110,6 +102,7 @@ export default {
   tagsView: {
     search: 'Search',
     menu: 'menu',
+    clearCache: 'Clear Cache',
     closeOthers: 'Close Others',
     closeAll: 'Close All'
   }
