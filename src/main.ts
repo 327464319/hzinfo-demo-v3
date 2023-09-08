@@ -27,7 +27,7 @@ console.log(router)
 let instance: any = null
 instance = createApp(App)
 instance.component('basic-container', basicContainer);
-instance.use(i18n)
+// instance.use(i18n)
 instance.use(ElementPlus,{
   locale: messages[language]
 })
