@@ -18,11 +18,15 @@ import 'element-plus/dist/index.css'
 
 import Avue from '@smallwei/avue';
 import '@smallwei/avue/lib/index.css';
+import './styles/common.scss';
+
+import basicContainer from './components/basic-container/main'
 
 console.log(router)
 // 引入路由
 let instance: any = null
 instance = createApp(App)
+instance.component('basic-container', basicContainer);
 instance.use(i18n)
 instance.use(ElementPlus,{
   locale: messages[language]
