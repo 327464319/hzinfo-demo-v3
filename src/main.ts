@@ -1,3 +1,5 @@
+
+import './public-path'; // qiankun
 import {createApp} from 'vue'
 import website from './config/website'
 import {renderWithQiankun, qiankunWindow} from 'vite-plugin-qiankun/dist/helper'

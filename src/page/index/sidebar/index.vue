@@ -46,7 +46,7 @@
     },
     mounted () {
       console.log(this.menuApps)
-      console.log(this.menu)
+      console.log(this.menu,'333333')
     },
     methods: {}
   }

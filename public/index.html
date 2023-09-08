@@ -1,14 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <script src="/cdn/common/systemInfo.js" charset="utf-8"></script>
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<!--  <head>-->
+<!--    <meta charset="UTF-8" />-->
+<!--    <script src="/cdn/common/systemInfo.js" charset="utf-8"></script>-->
+<!--    <link rel="icon" type="image/svg+xml" href="/vite.svg" />-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+<!--    <title>Vite + Vue + TS</title>-->
+<!--  </head>-->
+<!--  <body>-->
+<!--    <div id="app"></div>-->
+<!--    <script type="module" src="/src/main.ts"></script>-->
+<!--  </body>-->
+<!--</html>-->
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <link rel="icon" href="/favicon.png">
+  <script src="/cdn/common/systemInfo.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/cdn/element-ui/2.15.1/theme-chalk/index.css">
+  <link rel="stylesheet" href="/cdn/animate/3.5.2/animate.css">
+  <link rel="stylesheet" href="/cdn/iconfont/1.0.0/index.css">
+  <link rel="stylesheet" href="/cdn/avue/2.8.1/index.css">
+  <script src="/cdn/xlsx/FileSaver.min.js"></script>
+  <script src="/cdn/xlsx/xlsx.full.min.js"></script>
+  <!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=sSelQoVi2L3KofLo1HOobonW&s=1"></script> -->
+
+  <title>HZInfo3000信息化平台</title>
+  <style>
+      html,
+      body,
+      #app, #ie-browser {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+      }
+
+      .avue-home {
+          background-color: #303133;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+      }
+
+      .avue-home__main {
+          user-select: none;
+          width: 100%;
+          flex-grow: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+      }
+
+      .avue-home__footer {
+          width: 100%;
+          flex-grow: 0;
+          text-align: center;
+          padding: 1em 0;
+      }
+
+      .avue-home__footer > a {
+          font-size: 12px;
+          color: #ABABAB;
+          text-decoration: none;
+      }
+
+      .avue-home__loading {
+          height: 32px;
+          width: 32px;
+          margin-bottom: 20px;
+      }
+
+      .avue-home__title {
+          color: #FFF;
+          font-size: 14px;
+          margin-bottom: 10px;
+      }
+
+      .avue-home__sub-title {
+          color: #ABABAB;
+          font-size: 12px;
+      }
+      #ie-browser {
+          display: none;
+      }
+
+      #ie-browser .avue-home {
+          background: #fff;
+      }
+  </style>
+</head>
+
+<body>
+<noscript>
+  <strong>
+    很抱歉，如果没有 JavaScript 支持，Saber 将不能正常工作。请启用浏览器的 JavaScript 然后继续。
+  </strong>
+</noscript>
+<div id="ie-browser">
+  <div class="avue-home">
+    <div class="avue-home__main">
+      <p><img src="/img/bg/ie.jpg"></p>
+    </div>
+  </div>
+</div>
+<div id="app">
+  <div class="avue-home">
+    <div class="avue-home__main">
+      <img class="avue-home__loading" src="/svg/loading-spin.svg" alt="loading">
+      <div class="avue-home__title">
+        正在加载资源
+      </div>
+      <div class="avue-home__sub-title d">
+        初次加载资源可能需要较多时间 请耐心等待
+      </div>
+    </div>
+    <div class="avue-home__footer">
+    </div>
+  </div>
+</div>
+<script type="module" src="/src/main.ts"></script>
+<!-- built files will be auto injected -->
+<script src="/util/aes.js" charset="utf-8"></script>
+<script src="/cdn/vue/2.6.10/vue.min.js" charset="utf-8"></script>
+<script src="/cdn/vuex/3.1.1/vuex.min.js" charset="utf-8"></script>
+<script src="/cdn/vue-router/3.0.1/vue-router.min.js" charset="utf-8"></script>
+<script src="/cdn/axios/1.0.0/axios.min.js" charset="utf-8"></script>
+<script src="/cdn/element-ui/2.15.1/index.js" charset="utf-8"></script>
+<script src="/cdn/avue/2.8.1/avue.min.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+  function myBrowser(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    console.log('userAgent = ' + userAgent)
+    var isOpera = userAgent.indexOf("Opera") > -1;
+    if (isOpera) {
+      return "Opera"
+    }; //判断是否Opera浏览器
+    if (userAgent.indexOf("Firefox") > -1) {
+      return "FF";
+    } //判断是否Firefox浏览器
+    if (userAgent.indexOf("Chrome") > -1){
+      return "Chrome";
+    }
+    if (userAgent.indexOf("Safari") > -1) {
+      return "Safari";
+    } //判断是否Safari浏览器
+    if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera || userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1) {
+      return "IE";
+    }; //判断是否IE浏览器
+  }
+  //以下是调用上面的函数
+  var mb = myBrowser();
+  if ("IE" == mb) {
+    document.getElementById('ie-browser').style.display = 'block';
+    document.getElementById('app').style.display = 'none';
+  }
+</script>
+</body>
+
 </html>
