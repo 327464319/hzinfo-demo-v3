@@ -2,29 +2,43 @@ import {createApp} from 'vue'
 import website from './config/website'
 import {renderWithQiankun, qiankunWindow} from 'vite-plugin-qiankun/dist/helper'
 import App from './App.vue'
+import axios from './router/axios'
 // 引入路由
 
 // pinia
 // import pinia from './store'
 import store from './store'
 import i18n from './lang/'
+import { language, messages } from './lang/';
 // import 'element-plus/dist/index.css'
 import router from './router/router'
 
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
+import Avue from '@smallwei/avue';
+import '@smallwei/avue/lib/index.css';
+
 console.log(router)
 // 引入路由
 let instance: any = null
 instance = createApp(App)
+instance.use(i18n)
+instance.use(ElementPlus,{
+  locale: messages[language]
+})
+instance.use(Avue, {
+  axios,
+  calcHeight: -165,
+  locale: messages[language]
+})
 instance.use(router)
 instance.use(i18n)
 instance.use(store)
 instance.config.globalProperties.website = website
 
 
-instance.use(ElementPlus)
+
 
 function render(props: any = {}) {
   const {container} = props

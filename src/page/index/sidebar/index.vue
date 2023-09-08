@@ -26,7 +26,7 @@
   import logo from '../logo'
   import sidebarItem from './sidebarItem'
 
-  console.log(111)
+  console.log('sidebar')
 
   export default {
     name: 'sidebar',

@@ -3,6 +3,7 @@ let RouterPlugin = function () {
   this.$store = null
 }
 RouterPlugin.install = function (option = {}) {
+  console.log(option,'RouterPlugin')
   this.$router = option.router
   this.$store = option.store
   let i18n = option.i18n.global
@@ -50,10 +51,10 @@ RouterPlugin.install = function (option = {}) {
     },
     generateTitle: (title, key) => {
       if (!key) return title
-      const hasKey = i18n.$te('route.' + key)
+      const hasKey = i18n.te('route.' + key)
       if (hasKey) {
         // $t :this method from vue-i18n, inject in @/lang/index.js
-        const translatedTitle = i18n.$t('route.' + key)
+        const translatedTitle = i18n.t('route.' + key)
 
         return translatedTitle
       }
