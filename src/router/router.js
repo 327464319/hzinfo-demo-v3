@@ -17,10 +17,8 @@ import i18n from '@/lang' // Internationalization 国际化 多语言
 
 import Store from '../store/' // vuex
 import {name} from '../../package.json'
-console.log(20)
 
 Store.commit('setPoweredByQiankun', window.__POWERED_BY_QIANKUN__)
-console.log( window.__POWERED_BY_QIANKUN__)
  // 创建路由
 let Router
 // let history = null
@@ -45,11 +43,6 @@ let Router
 // // 创建路由
 export const createRouter = () =>
 {
-  console.log([...PageRouter, ...ViewsRouter])
-  console.log(createRou)
-  console.log(import.meta.env)
-  console.log(window.__POWERED_BY_QIANKUN__ )
-  console.log(createWebHistory(import.meta.env.MODE == 'development' || window.__POWERED_BY_QIANKUN__ ? '/' : `/${name}`))
   return createRou({
     // https://router.vuejs.org/zh/guide/advanced/scroll-behavior.html#%E5%BC%82%E6%AD%A5%E6%BB%9A%E5%8A%A8
     // 这个方法 是控制滚动条
@@ -75,12 +68,9 @@ export const createRouter = () =>
   })
 }
 
-console.log(71)
 // let Router
 if (!Store.state.microApps.__POWERED_BY_QIANKUN__) {
-  console.log(74)
   Router = createRouter() // 获得 route 实例
-  console.log(76)
   AvueRouter.install({
     store: Store,
     router: Router,
@@ -94,7 +84,6 @@ if (!Store.state.microApps.__POWERED_BY_QIANKUN__) {
 
   PageRouter.forEach((ele) => Router.addRoute(ele))
   ViewsRouter.forEach((ele) => Router.addRoute(ele))
-  console.log(86)
 } else {
   Router =   createRou({
     // https://router.vuejs.org/zh/guide/advanced/scroll-behavior.html#%E5%BC%82%E6%AD%A5%E6%BB%9A%E5%8A%A8
@@ -106,7 +95,6 @@ if (!Store.state.microApps.__POWERED_BY_QIANKUN__) {
     routes: [...ViewsRouter, ...PageRouter, ...ViewsSubRouter]
   })
     //
-  console.log(97)
 
 }
 
@@ -121,8 +109,6 @@ export function resetRouter () {
   })
 }
 
-console.log(Router.getRoutes())
 
-console.log('router.js end')
 
 export default Router

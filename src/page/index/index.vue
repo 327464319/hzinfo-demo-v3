@@ -61,7 +61,6 @@ import {validatenull} from '@/util/validate'
 import {calcDate} from '@/util/date.js'
 import {getStore} from '@/util/store.js'
 
-console.log(1111)
 
 export default {
   name: 'index',

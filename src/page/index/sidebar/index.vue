@@ -45,7 +45,8 @@
       }
     },
     mounted () {
-      // console.log(this.menuApps)
+      console.log(this.menuApps)
+      console.log(this.menu)
     },
     methods: {}
   }

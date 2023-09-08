@@ -3,11 +3,9 @@ let RouterPlugin = function () {
   this.$store = null
 }
 RouterPlugin.install = function (option = {}) {
-  console.log(option,'RouterPlugin')
   this.$router = option.router
   this.$store = option.store
   let i18n = option.i18n.global
-  console.log(option)
 
   // // 这个的作用是 为了检查出网页链接，因为本项目用到了 iframe
   function isURL (s) {
@@ -96,8 +94,6 @@ RouterPlugin.install = function (option = {}) {
        * first: 为了区分外界 调用formatRoutes 和 当前文件调用 formatRoutes
       */
     formatRoutes: function (aMenu = [], first) {
-      // window.console.log('aMenu')
-      // window.console.log(aMenu)
       const aRouter = []
       // 获取到全局配置中的 props
       const propsConfig = this.$website.menu.props
@@ -193,7 +189,6 @@ RouterPlugin.install = function (option = {}) {
         }
         aRouter.push(oRouter)
       }
-      // console.log(aRouter)
       // for循环结束
       // 这个first 卡的其实就是首路由
       if (first) {

@@ -1,12 +1,8 @@
 import Layout from '@/page/index/'
 import routes from './config'
 
-console.log(routes)
 
-console.log('router config')
 const modules = import.meta.glob('../../**/**/*.vue')
-console.log('===========================')
-console.log(modules)
 
 if (routes) {
     function changeChildren (item) {
