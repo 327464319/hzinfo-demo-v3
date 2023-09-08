@@ -1,7 +1,7 @@
 <template>
   <div class="login-container"
        @keyup.enter.native="handleLogin">
-    <top-color v-show="false"></top-color>
+<!--    <top-color v-if="false"></top-color>-->
     <div class="login-weaper animated bounceInDown">
       <div class="login-left">
         <div class="login-time">
@@ -67,13 +67,9 @@
         this.handleLogin();
       }
     },
-    created() {
+    mounted() {
       this.handleLogin();
       this.getTime();
-    },
-    mounted() {
-      console.log('1====================')
-      console.log(this.$t('login'))
     },
     computed: {
       ...mapGetters(["website", "tagWel"])
