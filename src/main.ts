@@ -7,8 +7,6 @@ import App from './App.vue'
 import axios from './router/axios'
 // 引入路由
 
-// pinia
-// import pinia from './store'
 import store from './store'
 import i18n from './lang/'
 import { language, messages } from './lang/';
