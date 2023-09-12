@@ -24,6 +24,8 @@ import './styles/common.scss';
 
 import basicContainer from './components/basic-container/main'
 
+import {timeReplaceMark} from './util/valid'
+
 // 引入路由
 let instance: any = null
 instance = createApp(App)
@@ -69,5 +71,17 @@ renderWithQiankun({
 })
 
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
-  render()
+  // 监听输入字符限制
+  document.addEventListener('input', function (ev) {
+    if(ev.target.type === 'text' || ev.target.type === 'textarea'){
+      timeReplaceMark(ev.target);
+    }
+  })
+  // 引用地图
+  store.dispatch("LoadBaiduMapScript");
+
+  setTimeout(() => {
+    // 引用地图加载
+    render();
+  }, 200)
 }
