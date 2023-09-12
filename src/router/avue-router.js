@@ -1,3 +1,5 @@
+const modules = import.meta.glob('../../**/**/*.vue')
+console.log(modules)
 let RouterPlugin = function () {
   this.$router = null
   this.$store = null
@@ -140,20 +142,12 @@ RouterPlugin.install = function (option = {}) {
         const isChild = children.length !== 0
         const oRouter = {
           path,
-          component (resolve) {
-            // 判断是否为首路由
-            if (first) {
-              require(['../page/index'], resolve)
+          component: first
 
-              // 判断是否为多层路由
-            } else if (isChild && !first) {
-              require(['../page/index/layout'], resolve)
-
-              // 判断是否为最终的页面视图
-            } else {
-              require([`../${component}.vue`], resolve)
-            }
-          },
+            ? modules[`../page/index/index.vue`]
+            : isChild
+              ? modules[`../page/index/layout.vue`]
+              : modules[`../${component}.vue`],
           name,
           icon,
           meta,
@@ -169,9 +163,7 @@ RouterPlugin.install = function (option = {}) {
               // 这里的isURL判断，因为这个网站有使用 iframe。所以需要判断是否为网页链接
               if (!isURL(path)) oMenu[propsDefault.path] = `${path}/index`
               return [{
-                component (resolve) {
-                  require([`../${component}.vue`], resolve)
-                },
+                component :modules[`../${component}.vue`],
                 icon,
                 name,
                 meta,
