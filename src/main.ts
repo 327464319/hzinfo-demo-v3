@@ -5,6 +5,7 @@ import website from './config/website'
 import {renderWithQiankun, qiankunWindow} from 'vite-plugin-qiankun/dist/helper'
 import App from './App.vue'
 import axios from './router/axios'
+import VueAxios from 'vue-axios';
 // 引入路由
 
 import store from './store'
@@ -37,6 +38,7 @@ instance.use(Avue, {
   calcHeight: -165,
   locale: messages[language]
 })
+instance.use(VueAxios)
 instance.use(router)
 instance.use(i18n)
 instance.use(store)
