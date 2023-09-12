@@ -123,7 +123,6 @@ export default {
 
       let menuFunc = env.MODE == 'development' ? 'GetJsonRoutes' : 'GetAppMenu'
       this.$store.dispatch(menuFunc, this.appCode).then((data) => {
-        console.log(data,'22222222222')
 
         if (data.length !== 0) {
           this.$router.$avueRouter.formatRoutes(data, true)

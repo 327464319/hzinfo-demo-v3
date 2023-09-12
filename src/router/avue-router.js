@@ -1,5 +1,4 @@
 const modules = import.meta.glob('../../**/**/*.vue')
-console.log(modules)
 let RouterPlugin = function () {
   this.$router = null
   this.$store = null

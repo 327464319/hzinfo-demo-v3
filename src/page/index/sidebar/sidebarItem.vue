@@ -91,10 +91,6 @@ export default {
     }
   },
   created() {},
-  mounted() {
-    console.log(this.props)
-    console.log(this.config)
-  },
   computed: {
     ...mapGetters(['roles']),
     labelKey() {
