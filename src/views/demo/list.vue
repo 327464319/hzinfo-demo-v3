@@ -8,7 +8,6 @@
               :page="page"
           		:permission="permissionList"
           		:before-open="beforeOpen"
-          		:before-close="beforeClose"
           		@row-del="rowDel"
           		@row-update="rowUpdate"
           		@row-save="rowSave"
@@ -64,8 +63,8 @@
 				option:{
 					title:'表格的标题',
           tip: false, // 提示
-					align:'center', 
-					menuAlign:'center', // 
+					align:'center',
+					menuAlign:'center', //
 					searchMenuSpan: 6, // 搜索所占宽比例  24是整行
           border: true, // 边
           excelBtn:true, // 导入按钮
@@ -146,7 +145,7 @@
             label: "电话号码",
             prop: "Tel",
             rules: [{
-              validator: validateTel, 
+              validator: validateTel,
               trigger: 'blur'
             },{
               max: 20,
@@ -183,7 +182,7 @@
         return {
           /*
            * website.isDev 本地开发，默认为true，即显示按钮
-           * permission.list_add 权限按钮 
+           * permission.list_add 权限按钮
            * 运用：看上文删除按钮 v-if="permissionList.delBtn"
           */
           addBtn: this.website.isDev ? true : this.vaildData(this.permission.list_add, false),
