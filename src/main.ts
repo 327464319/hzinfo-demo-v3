@@ -16,6 +16,7 @@ import router from './router/router'
 import './permission' // 权限
 import './error' // 日志
 import {setupCache} from '@/cache'
+import {setupError} from '@/error'
 
 
 import ElementPlus from 'element-plus'
@@ -34,6 +35,7 @@ import {timeReplaceMark} from './util/valid'
 import * as urls from '@/config/env'
 import {loadStyle} from './util/util'
 import {iconfontUrl, iconfontVersion} from '@/config/env'
+
 
 
 // 引入路由
@@ -59,6 +61,7 @@ instance
 instance.config.globalProperties.website = website
 
 setupCache(instance)
+setupError(instance)
 
 // 加载相关url地址
 Object.keys(urls).forEach((key) => {
