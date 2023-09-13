@@ -28,7 +28,6 @@
     },
     created() {
       this.getMenuList();
-      console.log(this.website.menu)
     },
 
     watch: {
@@ -59,7 +58,6 @@
           for (let i = 0; i < list.length; i++) {
             const ele = Object.assign({}, list[i]);
             if (this.validatenull(ele[this.childrenKey])) {
-              console.log(ele,'---')
               this.menuList.push(ele);
             } else {
               findMenu(ele[this.childrenKey]);
