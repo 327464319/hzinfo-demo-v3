@@ -6,7 +6,7 @@
                    :placeholder="$t('search')"
                    @select="handleSelect">
 
-    <template slot-scope="{ item }">
+    <template #default = {item}>
       <i :class="[item[iconKey],'icon']"></i>
       <div class="name">{{ item[labelKey] }}</div>
       <div class="addr">{{ item[pathKey] }}</div>
@@ -28,6 +28,7 @@
     },
     created() {
       this.getMenuList();
+      console.log(this.website.menu)
     },
 
     watch: {
@@ -58,6 +59,7 @@
           for (let i = 0; i < list.length; i++) {
             const ele = Object.assign({}, list[i]);
             if (this.validatenull(ele[this.childrenKey])) {
+              console.log(ele,'---')
               this.menuList.push(ele);
             } else {
               findMenu(ele[this.childrenKey]);
@@ -65,6 +67,7 @@
           }
         };
         this.menuList = [];
+
         findMenu(this.menu);
       },
       querySearch(queryString, cb) {
