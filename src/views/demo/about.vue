@@ -3,20 +3,20 @@
     <div class="page-container">
       <div class="search">
         <div class="title">站点地图</div>
-        <div class="searchInput" v-if="isMapSearch">
-          <el-input
-            size="small"
-            placeholder="请输入关键字"
-            prefix-icon="el-icon-search"
-            v-model="input"
-          >
-            <el-button
-              slot="append"
-              icon="el-icon-search"
-              @click="search"
-            ></el-button>
-          </el-input>
-        </div>
+<!--        <div class="searchInput" v-if="isMapSearch">-->
+<!--          <el-input-->
+<!--            size="small"-->
+<!--            placeholder="请输入关键字"-->
+<!--            prefix-icon="el-icon-search"-->
+<!--            v-model="input"-->
+<!--          >-->
+<!--            <el-button-->
+<!--              slot="append"-->
+<!--              icon="el-icon-search"-->
+<!--              @click="search"-->
+<!--            ></el-button>-->
+<!--          </el-input>-->
+<!--        </div>-->
       </div>
       <div style="width:697px;height:550px;border:#ccc solid 1px;" id="map-container"></div>
     </div>
@@ -30,6 +30,7 @@
     name: "map",
     data() {
       return {
+        isMapSearch:false,
         markerArr: [{title:"广东省揭阳市惠来县鳌江镇新寨村",content:"广东省揭阳市惠来县鳌江镇新寨村",point:"116.06019|22.941737",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
         ]
       };
