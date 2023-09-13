@@ -27,7 +27,7 @@
   import {mapGetters} from "vuex";
 
   export default {
-    name: "map",
+    name: "CustomMap",
     data() {
       return {
         isMapSearch:false,
