@@ -6,7 +6,7 @@
     <template v-for="item in menu">
       <el-menu-item
         v-if="validatenull(item[childrenKey]) && vaildRoles(item)"
-        :index="item[pathKey]"
+        :index="item[pathKey]+''"
         @click="open(item)"
         :key="item[labelKey]"
         :class="{'is-active': vaildAvtive(item)}"
@@ -28,7 +28,7 @@
         </template>
         <template v-for="(child, cindex) in item[childrenKey]" :key="child[labelKey]">
           <el-menu-item
-            :index="(child[pathKey], cindex)"
+            :index="(child[pathKey], cindex)+''"
             @click="open(child)"
             :class="{'is-active': vaildAvtive(child)}"
             v-if="validatenull(child[childrenKey])"
