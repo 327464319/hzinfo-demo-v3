@@ -4,19 +4,11 @@
              mode="horizontal"
              text-color="#333">
       <el-menu-item index="0" @click.native="openHome(itemHome)" key="0">
-        <template slot="title">
+        <template #title>
           <i :class="itemHome.source"></i>
           <span>{{generateTitle(itemHome)}}</span>
         </template>
       </el-menu-item>
-      <!-- <template v-for="(item,index) in items">
-        <el-menu-item :index="item.id+''" @click.native="openMenu(item)" :key="index">
-          <template slot="title">
-            <i :class="item.source" style="padding-right: 5px;"></i>
-            <span>{{generateTitle(item)}}</span>
-          </template>
-        </el-menu-item>
-      </template> -->
     </el-menu>
   </div>
 </template>
