@@ -64,7 +64,6 @@
     created() {
     },
     mounted() {
-      console.log('tagList', this.tagList)
       this.setActive();
     },
     watch: {

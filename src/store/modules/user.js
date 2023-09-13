@@ -233,7 +233,6 @@ const user = {
         getJsonRoutes().then((res) => {
           commit('SET_APP_CODE', res.data.appCode)
           const menu = res.data.menu
-          console.log('GetAppMenu ---------------------', menu)
           menu.forEach((ele) => {
             addPath(ele, true)
           })
