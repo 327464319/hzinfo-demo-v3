@@ -1,6 +1,7 @@
 
 
 import type { App } from 'vue';
+import store from './store'
 
 export function setupError(app: App<Element>) {
   app.config.errorHandler = (err, vm, info) => {
