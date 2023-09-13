@@ -128,7 +128,8 @@
           }
         }
       },
-      openTag(item) {
+      openTag(row) {
+        const item = row.props
         let tag;
         if (item.name) {
           tag = this.findTag(item.name).tag;
