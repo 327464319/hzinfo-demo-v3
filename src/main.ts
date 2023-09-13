@@ -21,7 +21,10 @@ import Avue from '@smallwei/avue';
 import '@smallwei/avue/lib/index.css';
 import './styles/common.scss';
 
+import basicBlock from './components/basic-block/main'
 import basicContainer from './components/basic-container/main'
+import thirdRegister from './components/third-register/main'
+
 
 import {timeReplaceMark} from './util/valid'
 
@@ -29,6 +32,8 @@ import {timeReplaceMark} from './util/valid'
 let instance: any = null
 instance = createApp(App)
 instance.component('basic-container', basicContainer);
+instance.component('basic-block', basicBlock);
+instance.component('third-register', thirdRegister);
 // instance.use(i18n)
 instance.use(ElementPlus,{
   locale: messages[language]
