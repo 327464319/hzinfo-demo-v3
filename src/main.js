@@ -107,5 +107,5 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
     }
   })
   // 引用地图
-  store.dispatch('LoadBaiduMapScript').then(() => render())
+  store.dispatch('LoadBaiduMapScript').then(() => render({}))
 }

@@ -1,11 +1,11 @@
-import type { App } from 'vue';
+
 import store from './store';
 
-export function setupCache(app: App<Element>) {
+export function setupCache(app) {
   app.mixin({
     beforeRouteLeave: function (to, from, next) {
       if (this.$route.meta.keepAlive === true) {
-        const result = this.$route.meta.keepAlive === true && store.state.tags.tagList.some((ele: any) => {
+        const result = this.$route.meta.keepAlive === true && store.state.tags.tagList.some((ele) => {
           return ele.value === this.$route.fullPath;
         });
         if (this.$vnode && !result) {
