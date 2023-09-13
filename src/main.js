@@ -38,7 +38,7 @@ import {loadStyle} from './util/util'
 import {iconfontUrl, iconfontVersion} from '@/config/env'
 
 // 引入路由
-let instance: any = null
+let instance = null
 instance = createApp(App)
 instance.component('basic-container', basicContainer)
 instance.component('basic-block', basicBlock)
@@ -76,12 +76,12 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   instance.component(key, component)
 }
 
-function render(props: any = {}) {
+function render(props) {
   const {container} = props
   instance.mount(container ? container.querySelector('#app') : '#app')
 }
 renderWithQiankun({
-  mount(props: any) {
+  mount(props) {
     render(props)
   },
   bootstrap() {
@@ -90,7 +90,7 @@ renderWithQiankun({
   update() {
     console.log('%c', 'color:green;', ' ChildOne update')
   },
-  unmount(props: any) {
+  unmount(props) {
     console.log('unmount', props)
     instance.unmount()
     instance._container.innerHTML = ''

@@ -5,7 +5,7 @@ export function setupCache(app: App<Element>) {
   app.mixin({
     beforeRouteLeave: function (to, from, next) {
       if (this.$route.meta.keepAlive === true) {
-        const result = this.$route.meta.keepAlive === true && store.state.tags.tagList.some(ele => {
+        const result = this.$route.meta.keepAlive === true && store.state.tags.tagList.some((ele: any) => {
           return ele.value === this.$route.fullPath;
         });
         if (this.$vnode && !result) {

@@ -1,9 +1,8 @@
 
 
-import type { App } from 'vue';
 import store from './store'
 
-export function setupError(app: App<Element>) {
+export function setupError(app) {
   app.config.errorHandler = (err, vm, info) => {
     store.commit('ADD_LOGS', {
       type: 'error',
