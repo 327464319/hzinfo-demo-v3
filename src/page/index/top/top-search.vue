@@ -1,5 +1,6 @@
 <template>
   <el-autocomplete class="top-search"
+                   ref="elAutocomplete"
                    popper-class="my-autocomplete"
                    v-model="value"
                    :fetch-suggestions="querySearch"
@@ -86,6 +87,7 @@
       },
       handleSelect(item) {
         this.value = "";
+        this.$refs.elAutocomplete.blur()
         this.$router.push({
           path: this.$router.$avueRouter.getPath({
             name: item[this.labelKey],
