@@ -18,7 +18,6 @@ import './error' // 日志
 import {setupCache} from '@/cache'
 import {setupError} from '@/error'
 
-
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
@@ -35,8 +34,6 @@ import {timeReplaceMark} from './util/valid'
 import * as urls from '@/config/env'
 import {loadStyle} from './util/util'
 import {iconfontUrl, iconfontVersion} from '@/config/env'
-
-
 
 // 引入路由
 let instance: any = null
@@ -104,10 +101,5 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
     }
   })
   // 引用地图
-  store.dispatch('LoadBaiduMapScript')
-
-  setTimeout(() => {
-    // 引用地图加载
-    render()
-  }, 200)
+  store.dispatch('LoadBaiduMapScript').then(() => render())
 }
