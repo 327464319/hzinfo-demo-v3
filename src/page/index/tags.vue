@@ -30,18 +30,22 @@
         </el-tab-pane>
 
       </el-tabs>
-      <el-dropdown class="avue-tags__menu">
-        <el-button type="primary"
-                   size="">
+
+      <el-dropdown class="avue-tags__menu" >
+        <el-button type="primary">
           {{$t('tagsView.menu')}}
           <i class="el-icon-arrow-down el-icon--right"></i>
+          <el-icon><ArrowDown /></el-icon>
         </el-button>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="$parent.isSearch=true">{{$t('tagsView.search')}}</el-dropdown-item>
-          <el-dropdown-item @click.native="closeOthersTags">{{$t('tagsView.closeOthers')}}</el-dropdown-item>
-          <el-dropdown-item @click.native="closeAllTags">{{$t('tagsView.closeAll')}}</el-dropdown-item>
-          <el-dropdown-item @click.native="clearCacheTags">{{$t('tagsView.clearCache')}}</el-dropdown-item>
-        </el-dropdown-menu>
+        <template #dropdown>
+          <el-dropdown-menu >
+            <el-dropdown-item @click.native="$parent.isSearch=true">{{$t('tagsView.search')}}</el-dropdown-item>
+            <el-dropdown-item @click.native="closeOthersTags">{{$t('tagsView.closeOthers')}}</el-dropdown-item>
+            <el-dropdown-item @click.native="closeAllTags">{{$t('tagsView.closeAll')}}</el-dropdown-item>
+            <el-dropdown-item @click.native="clearCacheTags">{{$t('tagsView.clearCache')}}</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+
       </el-dropdown>
     </div>
 

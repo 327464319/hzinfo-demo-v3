@@ -21,6 +21,8 @@ import {setupError} from '@/error'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
 import './styles/common.scss'
@@ -69,6 +71,10 @@ Object.keys(urls).forEach((key) => {
 iconfontVersion.forEach((ele) => {
   loadStyle(iconfontUrl.replace('$key', ele))
 })
+// 注册所有图标
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  instance.component(key, component)
+}
 
 function render(props: any = {}) {
   const {container} = props
