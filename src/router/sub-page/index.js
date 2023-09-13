@@ -1,6 +1,8 @@
 import Layout from '@/page/index/'
-import routes from './config'
+import * as rowRoutes from './config'
+import {deepClone} from '@/util/util'
 
+let routes = deepClone(rowRoutes.default)
 
 const modules = import.meta.glob('../../**/**/*.vue')
 
