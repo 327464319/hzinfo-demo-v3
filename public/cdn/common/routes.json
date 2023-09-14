@@ -2,15 +2,15 @@
   "menu": [
     {
       "name": "模板",
-      "path": "/demo",
-      "code": "demo",
+      "path": "/demoV3",
+      "code": "demoV3",
       "icon": "iconfont iconicon_setting",
       "children": [
         {
-          "name": "列表",
-          "path": "/demo/list",
+          "name": "v3列表",
+          "path": "/demoV3/list",
           "isDataAuth": 0,
-          "code": "list",
+          "code": "demoV3",
           "icon": "iconfont icon-navicon",
           "button": [
             {
@@ -32,8 +32,8 @@
           ]
         },
         {
-          "name": "关于我们",
-          "path": "/demo/about",
+          "name": "关于我们V3",
+          "path": "/demoV3/about",
           "isDataAuth": 0,
           "code": "about",
           "icon": "iconfont icon-yonghu",

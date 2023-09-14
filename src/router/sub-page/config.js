@@ -1,15 +1,15 @@
 export default [
 	{
 		'name': '模板',
-		'path': '/demo',
+		'path': '/demoV3',
 		'children': [
 			{
-				'name': '列表',
-				'path': '/demo/list'
+				'name': 'v3列表',
+				'path': '/demoV3/list'
 			},
 			{
-				'name': '关于我们',
-				'path': '/demo/about'
+				'name': '关于我们V3',
+				'path': '/demoV3/about'
 			}
 		]
 	}

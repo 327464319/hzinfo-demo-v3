@@ -6,11 +6,16 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import qiankun from 'vite-plugin-qiankun'
+
+
 const packName = require('./package').name
 // https://vitejs.dev/config/
 export default ({ mode }) => {
+  console.log(mode)
+  console.log(loadEnv(mode, process.cwd()).VITE_CHILDONE_URL)
   return defineConfig({
-    base: mode === 'development' ? '/' : loadEnv(mode, process.cwd()).VITE_CHILDONE_URL + '/',
+    // base: mode === 'development' ? '/' : loadEnv(mode, process.cwd()).VITE_CHILDONE_URL + '/',
+    base: mode === 'development' ? '/' : `/subapp/${packName}/`,
     plugins: [
       vue(),
       // 配置qiankun
@@ -64,7 +69,7 @@ export default ({ mode }) => {
     build: {
       sourcemap: false, // 关闭映射文件，减小打包体积
       minify: 'terser', // 混淆器，terser构建后文件体积更小
-      // chunkSizeWarningLimit: 1500, // 打包单个文件体积大小 默认为500kb
+      chunkSizeWarningLimit: 1500, // 打包单个文件体积大小 默认为500kb
       terserOptions: {
         compress: {
           drop_console: true, // 生产环境移除 console
@@ -75,6 +80,7 @@ export default ({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks (id) {
+            console.log(id)
             if (id.includes('node_modules')) {
               return id
                 .toString()

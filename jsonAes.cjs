@@ -1,5 +1,5 @@
 
-import fs from 'fs'
+let fs = require('fs');
 const { name, version, client } = require('./package');
 
 let CryptoJS = require("crypto-js");
