@@ -10,7 +10,7 @@
           "name": "v3列表",
           "path": "/demoV3/list",
           "isDataAuth": 0,
-          "code": "demoV3",
+          "code": "demoV3List",
           "icon": "iconfont icon-navicon",
           "button": [
             {
@@ -35,7 +35,7 @@
           "name": "关于我们V3",
           "path": "/demoV3/about",
           "isDataAuth": 0,
-          "code": "about",
+          "code": "demoV3about",
           "icon": "iconfont icon-yonghu",
           "button": [
             {
