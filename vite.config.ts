@@ -47,7 +47,7 @@ export default ({ mode }) => {
     },
     server: {
       open: '/index.html',
-      port: port,
+      port,
       origin: loadEnv(mode, process.cwd()).VITE_CHILDONE_URL,
       proxy: {
         '/api': {
@@ -84,24 +84,25 @@ export default ({ mode }) => {
       rollupOptions: {
         // target:'esnext',
         output: {
-          manualChunks (id) {
-            console.log(id)
-            if (id.includes('node_modules')) {
-              return id
-                .toString()
-                .split('node_modules/')[1]
-                .split('/')[0]
-                .toString()
-            }
-          },
-          chunkFileNames: (chunkInfo) => {
-            const facadeModuleId = chunkInfo.facadeModuleId
-              ? chunkInfo.facadeModuleId.split('/')
-              : []
-            const fileName =
-              facadeModuleId[facadeModuleId.length - 2] || '[name]'
-            return `js/${fileName}/[name].[hash].js`
-          }
+          format: `umd`,
+          // manualChunks (id) {
+          //   console.log(id)
+          //   if (id.includes('node_modules')) {
+          //     return id
+          //       .toString()
+          //       .split('node_modules/')[1]
+          //       .split('/')[0]
+          //       .toString()
+          //   }
+          // },
+          // chunkFileNames: (chunkInfo) => {
+          //   const facadeModuleId = chunkInfo.facadeModuleId
+          //     ? chunkInfo.facadeModuleId.split('/')
+          //     : []
+          //   const fileName =
+          //     facadeModuleId[facadeModuleId.length - 2] || '[name]'
+          //   return `js/${fileName}/[name].[hash].js`
+          // }
         }
       }
     }
