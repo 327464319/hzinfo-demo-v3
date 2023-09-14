@@ -48,7 +48,7 @@ export const createRouter = () =>
     // 这个方法 是控制滚动条
     // 如果 retuen falsy || {} ,则不发生滚动
     // mode: "hash",
-    history: createWebHistory(import.meta.env.MODE == 'development' || window.__POWERED_BY_QIANKUN__ ? '/' : `/${name}`),
+    history: createWebHistory((import.meta.env.MODE == 'development' && !window.__POWERED_BY_QIANKUN__ )? '/' : `/${name}`),
     scrollBehavior (to, from, savedPosition) {
       // savedPosition 这个参数当且仅当导航 (通过浏览器的 前进/后退 按钮触发) 时才可用  效果和 router.go() 或 router.back()
       if (savedPosition) {
@@ -85,13 +85,15 @@ if (!Store.state.microApps.__POWERED_BY_QIANKUN__) {
   PageRouter.forEach((ele) => Router.addRoute(ele))
   ViewsRouter.forEach((ele) => Router.addRoute(ele))
 } else {
+  console.log([...ViewsRouter, ...PageRouter, ...ViewsSubRouter])
+  console.log(name)
   Router =   createRou({
     // https://router.vuejs.org/zh/guide/advanced/scroll-behavior.html#%E5%BC%82%E6%AD%A5%E6%BB%9A%E5%8A%A8
     // 这个方法 是控制滚动条
     // 如果 retuen falsy || {} ,则不发生滚动
     // mode: "hash",
-    base: import.meta.env.MODE == 'development' || window.__POWERED_BY_QIANKUN__ ? '/' : `/${name}`,
-    history: createWebHistory(),
+    // base: (import.meta.env.MODE == 'development' && !window.__POWERED_BY_QIANKUN__ )? '/' : `/${name}`,
+    history: createWebHistory((import.meta.env.MODE == 'development' && !window.__POWERED_BY_QIANKUN__ )? '/' : `/${name}`),
     routes: [...ViewsRouter, ...PageRouter, ...ViewsSubRouter]
   })
     //

@@ -7,6 +7,16 @@ declare module '*.vue' {
   export default component
 }
 
+// interface Window {
+//   ENV_CONFIG: {
+//     VITE_GLOB_API_URL: string;
+//     VITE_GLOB_CLIENT_ID: string;
+//   };
+//   __POWERED_BY_QIANKUN__?: boolean;
+//   __INJECTED_PUBLIC_PATH_BY_QIANKUN__?: string;
+// }
+
+
 // declare module 'axios' {
 //   export interface AxiosInstance {
 //     <T = any>(config: AxiosRequestConfig): Promise<T>;

@@ -11,11 +11,15 @@ import qiankun from 'vite-plugin-qiankun'
 const packName = require('./package').name
 // https://vitejs.dev/config/
 export default ({ mode }) => {
+  const port = +loadEnv(mode, process.cwd()).VITE_CHILDONE_URL.split(':')[1]
   console.log(mode)
   console.log(loadEnv(mode, process.cwd()).VITE_CHILDONE_URL)
+  console.log(port,'port')
+  console.log(packName)
   return defineConfig({
+
     // base: mode === 'development' ? '/' : loadEnv(mode, process.cwd()).VITE_CHILDONE_URL + '/',
-    base: mode === 'development' ? '/' : `/subapp/${packName}/`,
+    base: mode === 'development' ? `/` : `/subapp/${packName}`,
     plugins: [
       vue(),
       // 配置qiankun
@@ -43,7 +47,7 @@ export default ({ mode }) => {
     },
     server: {
       open: '/index.html',
-      port: +loadEnv(mode, process.cwd()).VITE_CHILDONE_URL.split(':')[1],
+      port: port,
       origin: loadEnv(mode, process.cwd()).VITE_CHILDONE_URL,
       proxy: {
         '/api': {
@@ -78,6 +82,7 @@ export default ({ mode }) => {
       },
       // rollupOptions 将打包文件按照node_modules里边的包名进行分割
       rollupOptions: {
+        // target:'esnext',
         output: {
           manualChunks (id) {
             console.log(id)

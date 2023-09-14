@@ -37,6 +37,8 @@ import * as urls from '@/config/env'
 import {loadStyle} from './util/util'
 import {iconfontUrl, iconfontVersion} from '@/config/env'
 
+import {name} from "../package.json";
+
 // 引入路由
 let instance = null
 instance = createApp(App)
@@ -54,9 +56,9 @@ instance
     calcHeight: -165,
     locale: messages[language]
   })
-  .use(router)
   .use(i18n)
   .use(store)
+  .use(router)
 instance.config.globalProperties.website = website
 
 setupCache(instance)
@@ -75,13 +77,43 @@ iconfontVersion.forEach((ele) => {
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   instance.component(key, component)
 }
+function storeTest(props) {
+  props.onGlobalStateChange &&
+  props.onGlobalStateChange(
+    (value, prev) => {
+      console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev);
+      if (value.themeName) store.commit('SET_THEME_NAME', value.themeName);
+      if (value.fontSize) store.commit('SET_FONT_SIZE', value.fontSize);
+      if (value.colorName) store.commit('SET_COLOR_NAME', value.colorName);
+    },
+    true,
+  );
+  props.setGlobalState &&
+  props.setGlobalState({
+    ignore: props.name,
+    user: {
+      name: props.name,
+    },
+  });
+}
 
 function render(props) {
-  const {container} = props
+  const {container,emitFnc} = props
+
+  // 设置appCode
+  store.commit('SET_APP_CODE', name);
+  store.commit('setPoweredByQiankun', qiankunWindow.__POWERED_BY_QIANKUN__);
+
+  Object.keys(emitFnc || {}).forEach(i => {
+    instance.config.globalProperties[`$${i}`] = emitFnc[i]
+  });
+
   instance.mount(container ? container.querySelector('#app') : '#app')
 }
 renderWithQiankun({
   mount(props) {
+    console.log('[vue] props from main framework', props);
+    storeTest(props);
     render(props)
   },
   bootstrap() {
