@@ -41,42 +41,13 @@ import {name} from "../package.json";
 
 // 引入路由
 let instance = null
-instance = createApp(App)
-instance.component('basic-container', basicContainer)
-instance.component('basic-block', basicBlock)
-instance.component('third-register', thirdRegister)
 
-// instance.use(i18n)
-instance
-  .use(ElementPlus, {
-    locale: messages[language]
-  })
-  .use(Avue, {
-    axios,
-    calcHeight: -165,
-    locale: messages[language]
-  })
-  .use(i18n)
-  .use(store)
-  .use(router)
-instance.config.globalProperties.website = website
-
-setupCache(instance)
-setupError(instance)
-
-// 加载相关url地址
-Object.keys(urls).forEach((key) => {
-  instance.config.globalProperties[key] = urls[key]
-})
 
 // 动态加载阿里云字体库
 iconfontVersion.forEach((ele) => {
   loadStyle(iconfontUrl.replace('$key', ele))
 })
-// 注册所有图标
-for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-  instance.component(key, component)
-}
+
 function storeTest(props) {
   props.onGlobalStateChange &&
   props.onGlobalStateChange(
@@ -100,13 +71,47 @@ function storeTest(props) {
 function render(props) {
   const {container,emitFnc} = props
 
+  instance = createApp(App)
+  instance.component('basic-container', basicContainer)
+  instance.component('basic-block', basicBlock)
+  instance.component('third-register', thirdRegister)
+
+// instance.use(i18n)
+  instance
+    .use(ElementPlus, {
+      locale: messages[language]
+    })
+    .use(Avue, {
+      axios,
+      calcHeight: -165,
+      locale: messages[language]
+    })
+    .use(i18n)
+    .use(store)
+    .use(router)
+  instance.config.globalProperties.website = website
+
+  // 注册所有图标
+  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    instance.component(key, component)
+  }
+
+  setupCache(instance)
+  setupError(instance)
+
+// 加载相关url地址
+  Object.keys(urls).forEach((key) => {
+    instance.config.globalProperties[key] = urls[key]
+  })
+
   // 设置appCode
   store.commit('SET_APP_CODE', name);
   store.commit('setPoweredByQiankun', qiankunWindow.__POWERED_BY_QIANKUN__);
-
-  Object.keys(emitFnc || {}).forEach(i => {
-    instance.config.globalProperties[`$${i}`] = emitFnc[i]
-  });
+   if(instance?.config){
+     Object.keys(emitFnc || {}).forEach(i => {
+       instance.config.globalProperties[`$${i}`] = emitFnc[i]
+     });
+   }
 
   instance.mount(container ? container.querySelector('#app') : '#app')
 }
