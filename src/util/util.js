@@ -306,3 +306,14 @@ export const getQueryString = (name) => {
   if (r != null) return unescape(decodeURI(r[2]))
   return null
 }
+export function vaildData(data,defaultValue){
+  if (data === undefined || data === null || data === '') {
+    return defaultValue;
+  }
+  return data;
+}
+export function buttonPermission(perName,devSwitch = true,perSwitch = false){
+  return this.website.isDev
+    ? devSwitch
+    : vaildData(this.permission[perName], perSwitch)
+}

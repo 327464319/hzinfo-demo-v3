@@ -80,10 +80,12 @@ export default ({ mode }) => {
           drop_debugger: true // 生产环境移除 debugger
         }
       },
+
       // rollupOptions 将打包文件按照node_modules里边的包名进行分割
       rollupOptions: {
         // target:'esnext',
         output: {
+          // umd 不支持代码分割
           format: `umd`,
           // manualChunks (id) {
           //   console.log(id)

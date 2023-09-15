@@ -72,9 +72,7 @@ function render(props) {
   const {container,emitFnc} = props
 
   instance = createApp(App)
-  instance.component('basic-container', basicContainer)
-  instance.component('basic-block', basicBlock)
-  instance.component('third-register', thirdRegister)
+
 
 // instance.use(i18n)
   instance
@@ -90,6 +88,10 @@ function render(props) {
     .use(store)
     .use(router)
   instance.config.globalProperties.website = website
+
+  instance.component('basic-container', basicContainer)
+  instance.component('basic-block', basicBlock)
+  instance.component('third-register', thirdRegister)
 
   // 注册所有图标
   for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
