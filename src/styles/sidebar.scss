@@ -1,7 +1,7 @@
 
 
-.el-menu--popup{
-    .el-menu-item{
+.el-plus-menu--popup{
+    .el-plus-menu-item{
         background-color: #20222a;
         i,span{
             color:hsla(0,0%,100%,.7);
@@ -27,10 +27,10 @@
             }
         }
     }
-    
+
 }
 .avue-sidebar {
-    user-select: none; 
+    user-select: none;
     position: relative;
     padding-top: 60px;
     height: 100%;
@@ -39,7 +39,7 @@
     transition: width .2s;
     box-sizing: border-box;
     box-shadow: 2px 0 6px rgba(0,21,41,.35);
-    .el-scrollbar__wrap {
+    .el-plus-scrollbar__wrap {
         overflow-x: hidden;
     }
     &--tip{
@@ -58,7 +58,7 @@
         font-size: 14px;
         background-color: rgba(0,0,0,.4);
     }
-    .el-menu-item,.el-submenu__title{
+    .el-plus-menu-item,.el-plus-submenu__title{
         i{
             margin-right: 10px;
         }
@@ -87,5 +87,5 @@
             }
         }
     }
-    
+
 }

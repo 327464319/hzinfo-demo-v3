@@ -19,13 +19,17 @@ import {setupCache} from '@/cache'
 import {setupError} from '@/error'
 
 import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+// import 'element-plus/dist/index.css'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 import Avue from '@smallwei/avue'
-import '@smallwei/avue/lib/index.css'
-import './styles/common.scss'
+
+// import './styles/common.scss'
+if (!qiankunWindow.__POWERED_BY_QIANKUN__){
+  // 动态导入 防止污染主框架
+  import('./styles/common.scss')
+}
 
 import basicBlock from './components/basic-block/main'
 import basicContainer from './components/basic-container/main'

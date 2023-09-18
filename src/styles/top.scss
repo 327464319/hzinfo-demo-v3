@@ -9,12 +9,12 @@ $height:64px;
     line-height: $height;
     box-sizing: border-box;
     white-space: nowrap;
-    .el-menu-item{
+    .el-plus-menu-item{
         i,span{
             font-size: 13px;
         }
     }
-    .el-menu--horizontal>.el-menu-item {
+    .el-plus-menu--horizontal>.el-plus-menu-item {
       height: $height;
       line-height: $height;
     }
@@ -31,7 +31,7 @@ $height:64px;
 
 .top-menu {
     box-sizing: border-box;
-    .el-menu-item {
+    .el-plus-menu-item {
         padding: 0 10px;
         border:none !important;
     }
@@ -43,7 +43,7 @@ $height:64px;
     left: 20px;
     top:0;
     width: 400px !important;
-    .el-input__inner {
+    .el-plus-input__inner {
         font-size: 13px;
         border: none;
         background-color: transparent;
@@ -90,7 +90,7 @@ $height:64px;
     &--show {
         display: inline-block !important;
     }
-    .el-badge__content.is-fixed{
+    .el-plus-badge__content.is-fixed{
         top:12px;
         right: 5px;
     }

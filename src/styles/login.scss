@@ -14,7 +14,7 @@
   width: 1000px;
   box-shadow: -4px 5px 10px rgba(0, 0, 0, 0.4);
 
-  .el-input-group__append {
+  .el-plus-input-group__append {
     border: none;
   }
 }
@@ -132,15 +132,15 @@
     color: #333;
   }
 
-  .el-form-item__content {
+  .el-plus-form-item__content {
     width: 100%;
   }
 
-  .el-form-item {
+  .el-plus-form-item {
     margin-bottom: 12px;
   }
 
-  .el-input {
+  .el-plus-input {
     input {
       padding-bottom: 10px;
       text-indent: 5px;
@@ -151,7 +151,7 @@
       border-bottom: 1px solid rgb(235, 237, 242);
     }
 
-    .el-input__prefix {
+    .el-plus-input__prefix {
       i {
         padding: 0 5px;
         font-size: 16px !important;

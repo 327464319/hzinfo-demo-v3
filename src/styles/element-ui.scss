@@ -1,71 +1,71 @@
-.el-dropdown-menu__item {
+.el-plus-dropdown-menu__item {
   font-size: 12px !important;
   line-height: 28px !important;
 }
 
-.el-card.is-always-shadow {
+.el-plus-card.is-always-shadow {
   box-shadow: none;
   border: none !important;
 }
 
-.el-scrollbar__view {
+.el-plus-scrollbar__view {
   height: 100%;
 }
 
-.el-menu--horizontal {
+.el-plus-menu--horizontal {
   border-bottom: none !important;
 }
 
-.el-menu {
+.el-plus-menu {
   border-right: none !important;
 }
 
-.el-menu--display,
-.el-menu--display + .el-submenu__icon-arrow {
+.el-plus-menu--display,
+.el-plus-menu--display + .el-plus-submenu__icon-arrow {
   display: none;
 }
 
 
-.el-message__icon,
-.el-message__content {
+.el-plus-message__icon,
+.el-plus-message__content {
   display: inline-block;
 }
 
-.el-date-editor .el-range-input,
-.el-date-editor .el-range-separator {
+.el-plus-date-editor .el-plus-range-input,
+.el-plus-date-editor .el-plus-range-separator {
   height: auto;
   overflow: hidden;
 }
 
-.el-dialog__wrapper {
+.el-plus-dialog__wrapper {
   z-index: 2048;
 }
 
-.el-col {
+.el-plus-col {
   margin-bottom: 8px;
 }
 
-.el-main {
+.el-plus-main {
   padding: 0 !important;
 }
 
-.el-dropdown-menu__item--divided:before, .el-menu, .el-menu--horizontal > .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal > .el-menu-item:not(.is-disabled):hover, .el-menu--horizontal > .el-submenu .el-submenu__title:hover {
+.el-plus-dropdown-menu__item--divided:before, .el-plus-menu, .el-plus-menu--horizontal > .el-plus-menu-item:not(.is-disabled):focus, .el-plus-menu--horizontal > .el-plus-menu-item:not(.is-disabled):hover, .el-plus-menu--horizontal > .el-plus-submenu .el-plus-submenu__title:hover {
   background-color: transparent;
 }
 
 
-.el-dropdown-menu__item--divided:before, .el-menu, .el-menu--horizontal > .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal > .el-menu-item:not(.is-disabled):hover, .el-menu--horizontal > .el-submenu .el-submenu__title:hover {
+.el-plus-dropdown-menu__item--divided:before, .el-plus-menu, .el-plus-menu--horizontal > .el-plus-menu-item:not(.is-disabled):focus, .el-plus-menu--horizontal > .el-plus-menu-item:not(.is-disabled):hover, .el-plus-menu--horizontal > .el-plus-submenu .el-plus-submenu__title:hover {
   background-color: transparent !important;
 }
 
-.el-card__header {
+.el-plus-card__header {
   padding: 6px 18px !important;
 }
 
-.el-card__body {
+.el-plus-card__body {
   padding: 16px !important;
 }
 
-.el-divider--horizontal {
+.el-plus-divider--horizontal {
   margin: 12px 0 !important;
 }

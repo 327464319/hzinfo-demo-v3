@@ -1,5 +1,8 @@
 <template>
-  <router-view></router-view>
+  <el-config-provider namespace="el-plus">
+    <router-view></router-view>
+  </el-config-provider>
+
 </template>
 
 <script>
