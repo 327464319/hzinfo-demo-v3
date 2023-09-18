@@ -2,9 +2,9 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 // import eslintPlugin from 'vite-plugin-eslint'
 import { resolve } from 'path'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// import AutoImport from 'unplugin-auto-import/vite'
+// import Components from 'unplugin-vue-components/vite'
+//  import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import qiankun from 'vite-plugin-qiankun'
 
 
@@ -31,13 +31,22 @@ export default ({ mode }) => {
       //   // include: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.vue', 'src/*.js', 'src/*.ts', 'src/*.vue']
       //   include: ['src/**/*.vue', 'src/*.vue']
       // }),
-      AutoImport({
-        resolvers: [ElementPlusResolver()]
-      }),
+      // AutoImport({
+      //   resolvers: [ElementPlusResolver(
+      //     {
+      //       // 自动引入修改主题色添加这一行，使用预处理样式
+      //       // 不添加将会导致使用ElMessage，ElNotification等组件时默认的主题色会覆盖自定义的主题色
+      //       importStyle: "sass"
+      //     }
+      //   )],
+      // }),
+      // 按需加载
       // Components({
       //   resolvers: [ElementPlusResolver({
-      //   })]
-      // })
+      //     // 按需引入修改主题色添加这一行，使用预处理样式
+      //     importStyle: "sass"
+      //   })],
+      // }),
     ],
     // 配置别名，vite默认是没有别名配置的
     resolve: {
@@ -67,9 +76,10 @@ export default ({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/assets/css/variables.scss";'
+          // additionalData: '@import "@/assets/css/variables.scss";'
+          additionalData: `@use "@/assets/css/variables.scss" as *;`,
         }
-      }
+      },
     },
     build: {
       sourcemap: false, // 关闭映射文件，减小打包体积

@@ -1,5 +1,6 @@
 export default {
   tip: '提示',
+  tipTitle:'提示',
   title: `${systemInfo.baseInfo}`,
   logoutTip: '退出系统, 是否继续?',
   submitText: '确定',

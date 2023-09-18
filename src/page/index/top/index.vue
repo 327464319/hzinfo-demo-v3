@@ -82,7 +82,8 @@
           {{userInfo.real_name}}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
-        <el-dropdown-menu slot="dropdown">
+        <template #dropdown>
+        <el-dropdown-menu >
           <el-dropdown-item>
             <router-link to="/">{{$t('navbar.dashboard')}}</router-link>
           </el-dropdown-item>
@@ -93,6 +94,7 @@
                             divided>{{$t('navbar.logOut')}}
           </el-dropdown-item>
         </el-dropdown-menu>
+        </template>
       </el-dropdown>
     </div>
   </div>
@@ -164,7 +166,8 @@
         this.$store.commit("SET_FULLSCREN");
       },
       logout() {
-        this.$confirm(this.$t("logoutTip"), this.$t("tip"), {
+
+        this.$confirm(this.$t("logoutTip"), this.$t("tipTitle"), {
           confirmButtonText: this.$t("submitText"),
           cancelButtonText: this.$t("cancelText"),
           type: "warning"

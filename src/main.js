@@ -19,7 +19,8 @@ import {setupCache} from '@/cache'
 import {setupError} from '@/error'
 
 import ElementPlus from 'element-plus'
-// import 'element-plus/dist/index.css'
+import "element-plus/theme-chalk/src/index.scss"
+import '@/assets/css/avue.scss'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
@@ -29,11 +30,14 @@ import Avue from '@smallwei/avue'
 if (!qiankunWindow.__POWERED_BY_QIANKUN__){
   // 动态导入 防止污染主框架
   import('./styles/common.scss')
+  // 不在app根组件下的组件 并没有生效命名空间，使用原本样式
+  import ('element-plus/dist/index.css')
 }
 
 import basicBlock from './components/basic-block/main'
 import basicContainer from './components/basic-container/main'
 import thirdRegister from './components/third-register/main'
+
 
 import {timeReplaceMark} from './util/valid'
 
@@ -83,11 +87,16 @@ function render(props) {
     .use(ElementPlus, {
       locale: messages[language]
     })
-    .use(Avue, {
-      axios,
-      calcHeight: -165,
+    .use(Avue,{
+      size: '',
+      tableSize: '',
       locale: messages[language]
     })
+    // .use(Avue, {
+    //   axios,
+    //   calcHeight: -165,
+    //   locale: messages[language]
+    // })
     .use(i18n)
     .use(store)
     .use(router)

@@ -1,6 +1,7 @@
 export default {
   title: `${systemInfo.baseInfoEn}`,
   tip: 'tip',
+  tipTitle:'tip',
   logoutTip: 'Exit the system, do you want to continue?',
   submitText: 'submit',
   cancelText: 'cancel',
