@@ -34,9 +34,10 @@ export default ({ mode }) => {
       AutoImport({
         resolvers: [ElementPlusResolver()]
       }),
-      Components({
-        resolvers: [ElementPlusResolver()]
-      })
+      // Components({
+      //   resolvers: [ElementPlusResolver({
+      //   })]
+      // })
     ],
     // 配置别名，vite默认是没有别名配置的
     resolve: {
