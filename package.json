@@ -1,7 +1,7 @@
 {
-  "name": "hzinfo-demo-v3",
+  "name": "{{name}}",
   "private": true,
-  "version": "1.0.0",
+  "version": "{{version}}",
   "type": "module",
   "scripts": {
     "devBase": "node jsonJs.cjs",
