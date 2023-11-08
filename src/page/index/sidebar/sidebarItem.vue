@@ -192,7 +192,10 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-::v-deep .el-sub-menu__title span{
-  color: rgba(255, 255, 255, 0.7);
+::v-deep .el-plus-sub-menu__title {
+  i,span{
+    color: rgba(255, 255, 255, 0.7);
+  }
 }
+
 </style>
