@@ -11,7 +11,9 @@
                 v-model="loginForm.tenantId"
                 auto-complete="off"
                 :placeholder="$t('login.tenantId')">
-        <i slot="prefix" class="icon-quanxian"/>
+        <template #prefix>
+          <i class="icon-quanxian"/>
+        </template>
       </el-input>
     </el-form-item>
     <el-form-item prop="username">
@@ -20,7 +22,9 @@
                 v-model="loginForm.username"
                 auto-complete="off"
                 :placeholder="$t('login.username')">
-        <i slot="prefix" class="icon-yonghu"/>
+        <template #prefix>
+        <i  class="icon-yonghu"/>
+        </template>
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
@@ -30,8 +34,14 @@
                 v-model="loginForm.password"
                 auto-complete="off"
                 :placeholder="$t('login.password')">
-        <i class="el-icon-view el-input__icon" slot="suffix" @click="showPassword"/>
-        <i slot="prefix" class="icon-mima"/>
+
+        <template #suffix>
+          <i class="el-icon-view el-input__icon"  @click="showPassword"/>
+        </template>
+        <template #prefix>
+          <i slot="prefix" class="icon-mima"/>
+        </template>
+
       </el-input>
     </el-form-item>
     <el-form-item v-if="this.website.captchaMode" prop="code">
@@ -42,7 +52,9 @@
                     v-model="loginForm.code"
                     auto-complete="off"
                     :placeholder="$t('login.code')">
-            <i slot="prefix" class="icon-yanzhengma"/>
+            <template #prefix>
+             <i  class="icon-yanzhengma"/>
+            </template>
           </el-input>
         </el-col>
         <el-col :span="8">

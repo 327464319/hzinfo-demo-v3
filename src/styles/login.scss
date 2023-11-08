@@ -158,6 +158,20 @@
       }
     }
   }
+  .el-plus-input__wrapper{
+    margin-top: 5px;
+  }
+  .el-plus-form-item.is-error .el-plus-input__wrapper,.el-plus-input__wrapper,.el-plus-input__wrapper:hover{
+    box-shadow: none;
+  }
+  .el-plus-input--small .el-plus-input__wrapper{
+    padding: 0;
+  }
+  .el-form-item.is-error .el-plus-input__inner, .el-plus-form-item.is-error .el-plus-input__inner:focus, .el-plus-form-item.is-error .el-plus-textarea__inner, .el-plus-form-item.is-error .el-plus-textarea__inner:focus, .el-plus-message-box__input input.invalid, .el-plus-message-box__input input.invalid:focus{
+    border-color: #F56C6C;
+  }
+
+
 }
 
 .login-code {

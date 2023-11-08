@@ -135,6 +135,22 @@ renderWithQiankun({
     console.log('[vue] props from main framework', props);
     storeTest(props);
     render(props)
+
+    // const stylesHasAmis = [].slice.call(document.querySelectorAll("style"))
+    //
+    // stylesHasAmis&&stylesHasAmis.forEach((style,index) => {
+    //   const {
+    //     innerText
+    //   } = style;
+    //
+    //   if(innerText.indexOf('amis')!==-1 && (innerText.indexOf(`${website.port}`)!==-1||innerText.indexOf(name))!==-1){
+    //
+    //     // 通过主应用访问时去掉子应用导入的amis的css样式
+    //
+    //     document.head.removeChild(style)
+    //     return
+    //   }
+    // });
   },
   bootstrap() {
     console.log('%c', 'color:green;', ' ChildOne bootstrap')
