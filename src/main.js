@@ -32,8 +32,9 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__){
   import('./styles/common.scss')
   // 不在app根组件下的组件 并没有生效命名空间，使用原本样式
   import ('element-plus/dist/index.css')
-}
 
+}
+import('./styles/element.css')
 import basicBlock from './components/basic-block/main'
 import basicContainer from './components/basic-container/main'
 import thirdRegister from './components/third-register/main'
@@ -49,6 +50,7 @@ import {name} from "../package.json";
 
 // 引入路由
 let instance = null
+
 
 
 // 动态加载阿里云字体库
@@ -177,3 +179,4 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
   // 引用地图
   store.dispatch('LoadBaiduMapScript').then(() => render({}))
 }
+
