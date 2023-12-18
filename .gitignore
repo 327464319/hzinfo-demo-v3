@@ -1,24 +1,34 @@
-# Logs
-logs
-*.log
+.DS_Store
+.eslintrc.js
+.eslintignore
+node_modules
+/dist/
+/src/config/baseUrl.js
+svn
+
+/tests/e2e/videos/
+/tests/e2e/screenshots/
+
+# local env files
+.env.local
+.env.*.local
+.browserslistrc
+.postcssrc
+
+package-lock
+
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
 
 # Editor directories and files
-
-!.vscode/extensions.json
+.svn
 .idea
-.DS_Store
+.vscode
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.sw*
+*.lock
